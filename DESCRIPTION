@@ -1,0 +1,10 @@
+Package: rMR
+Type: Package
+Title: Importing data from Loligo Systems softwares, calculating metabolic rates, and critical tensions
+Version: 1.0
+Date: 2016-09-07
+Author: Tyler L. Moulton
+Maintainer: Tyler L. Moulton <tyler.moulton@mail.mcgill.ca>
+Description: This package is written to accompany Loligo Systems respirometry equipment. The package includes a function for loading data output by AutoResp software (get.witrox.data()), functions for calculating metabolic rates over user-specified time intervals, extracting critical points from data using broken stick regressions based on Yeager and Ultsch (1989), easy functions for converting between different units of barometric pressure, etc. Requires "biglm" in order reset RAM memory during computations, allowing for the analysis of large datasets.
+License: GPL-3
+Imports: biglm
