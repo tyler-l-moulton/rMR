@@ -13,20 +13,24 @@ Barom.Press(elevation.m, units = "atm")
 
 \arguments{
   \item{elevation.m}{
-Elevation in meters above sea level
+Elevation in meters above sea level.
 }
   \item{units}{
 Output units for barometric pressure must be one of: "atm", "kpa", or "mmHg".
 }
 }
 \details{
-pretty straightforward
+This is just a simple conversion function. Plug and chug, as they say...
 }
 \value{
-Barometric pressure in specified units
+Returns numeric object of barometric pressure in specified units.
 }
 \references{
-https://en.wikipedia.org/wiki/Atmospheric_pressure
+Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
+
+https://en.wikipedia.org/wiki/Barometric_formula
+
+http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 }
 \author{
 Tyler L. Moulton

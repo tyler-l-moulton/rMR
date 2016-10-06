@@ -27,7 +27,8 @@ This is a dataset acquired duirng a respirometry trial on a mormyrid of the spec
 
 }
 \references{
-Moulton Tyler L., Chapman Lauren J., Krahe Rudiger. Manuscript in Prep 
+Moulton Tyler L., Chapman Lauren J., Krahe Rudiger. Manuscript in Prep.
+
 }
 \examples{
 data(fishMR)

@@ -10,9 +10,9 @@ This package is written to accompany Loligo Systems respirometry equipment. The 
 }
 \details{
 \tabular{ll}{
-Package: \tab loligoR\cr
+Package: \tab rMR\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.0.1\cr
 Date: \tab 2016-09-07\cr
 License: \tab 3\cr
 }
@@ -24,7 +24,21 @@ Maintainer: Tyler L. Moulton <tyler.moulton@mail.mcgill.ca>
 
 }
 \references{
+Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media, 2012.
+
+Lumley, Thomas. "biglm: bounded memory linear and generalized linear models". 0.9-1. https://CRAN.R-project.org/package=biglm. 2013.
+
+McDonnell, Laura H., and Lauren J. Chapman. "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199 (2016): 62-70.
+
+Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
+
+Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11 (2013): 2103-2110.
+
 Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907.
+
+https://en.wikipedia.org/wiki/Barometric_formula
+
+http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 }
 \keyword{ package }
 \seealso{

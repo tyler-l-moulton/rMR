@@ -9,7 +9,7 @@ Determines equilibrium dissolved oxygen concentration in water based on pressure
 }
 \usage{
 Eq.Ox.conc(temp.C, elevation.m = NULL, 
-bar.press = NULL, bar.units = "atm", 
+bar.press = NULL, bar.units = NULL, 
 out.DO.meas = "mg/L")
 }
 
@@ -24,7 +24,7 @@ out.DO.meas = "mg/L")
     Barometric pressure. Default = 'NULL'. Must be NULL if 'elevation.m' takes a value.
 }
   \item{bar.units}{
-    Units of barometric pressure for value supplied in bar.press. Must be "atm", "kpa", or"mmHg".
+    Units of barometric pressure for value supplied in bar.press. Must be NULL, "atm", "kpa", or"mmHg".
 }
   \item{out.DO.meas}{
     Units of dissolved oxygen concentration 
@@ -64,5 +64,4 @@ bar.press = 674.1, bar.units = "mmHg")
 eqO2.1
 eqO2.2
 
-# Oh my word. They are the same!
 }

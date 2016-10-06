@@ -36,7 +36,7 @@ Passes on arguments to internal functions
 
 }
 \value{
-returns an object of method 'biglm'. The slope of this funtion is the metabolic rate in input units/sec/
+Returns an object of method 'biglm'. The slope of this funtion is the metabolic rate in input units/(default time).
 }
 \references{
 Thomas Lumley (2013). biglm: bounded memory linear and generalized linear models. R package version 0.9-1. http://CRAN.R-project.org/package=biglm
@@ -56,10 +56,10 @@ Tyler L. Moulton
  \code{\link{biglm}}
 }
 \examples{
-data(fish.resp)
+data(fishMR)
 
 bgd.resp <- 
-background.resp(d, "DO.mgL", 
+background.resp(fishMR, "DO.mgL", 
            start.time = "2015-07-02 16:05:00",
            end.time = "2015-07-02 16:35:00",
            ylab = "DO (mg/L)", xlab = "time (min)")

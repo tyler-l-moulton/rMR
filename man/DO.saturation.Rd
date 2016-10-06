@@ -10,30 +10,30 @@ Calculate the percent saturation of oxygen in water given external temperature, 
 \usage{
 DO.saturation(DO.mgl, temp.C,
 elevation.m = NULL, bar.press = NULL,
-bar.units = "atm")
+bar.units = NULL)
 }
 \arguments{
   \item{DO.mgl}{
-Recorded DO concentration in mg/L
+Recorded DO concentration in mg/L.
 }
   \item{temp.C}{
-Temperature in degrees C
+Temperature in degrees C.
 }
   \item{elevation.m}{
 Elevation in meters above sea level. EITHER 'elevation.m' or 'bar.press' must be specified.
 }
   \item{bar.press}{
-Barometric pressure in user defined units (bar.units)--defaults to 'atm'. EITHER 'elevation.m' or 'bar.press' must be specified.
+Barometric pressure in user defined units (bar.units)--defaults to 'NULL'. EITHER 'elevation.m' or 'bar.press' must be specified.
 }
   \item{bar.units}{
-Units of barometric pressure, defaults to 'atm'. must be 'atm', 'kpa' or "mmHg"
+Units of barometric pressure, defaults to 'NULL'. must be 'atm', 'kpa' or "mmHg"
 }
 }
 \details{
 
 }
 \value{
-numeric value of barometric pressure
+Returns numeric value of dissolved oxygen saturation.
 }
 \references{
 

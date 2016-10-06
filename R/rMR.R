@@ -57,9 +57,15 @@ Barom.Press <-
 #'
 DO.saturation <-
     function(DO.mgl, temp.C, elevation.m = NULL,
-             bar.press = NULL, bar.units = "atm"){
-        DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, elevation.m,
-                                     bar.press, bar.units)
+             bar.press = NULL, bar.units = NULL){
+        if(is.null(bar.press) == TRUE){
+            DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, elevation.m = elevation.m,
+                                         bar.press = NULL, bar.units=NULL)   
+        }else{
+            DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, elevation.m = elevation.m,
+                                         bar.press, bar.units=bar.units) 
+        }
+        
         return(DO.sat)
     }
 #'@export
@@ -70,7 +76,7 @@ DO.saturation <-
 DO.unit.convert <-
     function(x, DO.units.in, DO.units.out, 
              bar.units.in, bar.press, temp.C,
-             bar.units.out){
+             bar.units.out = "mmHg"){
         if(bar.units.in == bar.units.out){
             bar.press <- bar.press
         }else if(bar.units.in == "atm"){
@@ -124,8 +130,12 @@ DO.unit.convert <-
 #'
 Eq.Ox.conc <-
     function(temp.C, elevation.m = NULL,
-             bar.press = NULL, bar.units = "atm",
+             bar.press = NULL, bar.units = NULL,
              out.DO.meas = "mg/L"){
+        if(is.null(elevation.m) == FALSE &&
+           is.null(bar.units) == FALSE){
+            stop("'bar.units' must be NULL if 'elevation.m' is assigned a value. ")
+        }
         
         if( out.DO.meas == "PP"){
             
@@ -133,17 +143,20 @@ Eq.Ox.conc <-
                 bar.press <- bar.press
             } else if(is.null(bar.press) == TRUE &&
                           is.null(elevation.m) == FALSE){
-                bar.press <- Barom.Press (elevation.m, units = bar.units)
+                bar.press <- Barom.Press (elevation.m,
+                                          units = bar.units)
             }else{
-                stop("EITHER 'elevation.m' or 'barom.press' must be assigned
+                stop("EITHER 'elevation.m' or 'bar.press' must be assigned
                      a value. The other argument must be NULL.")
             }
-            
+
             Cp <-bar.press*0.20946 
             
-            }else if (out.DO.meas == "mg/L"){
-                std.Eq.Ox.conc <- exp(7.7117 - 1.31403*(log(temp.C + 45.93)))
-                if(is.null(bar.press) == FALSE && is.null(elevation.m) == TRUE){
+        }else if (out.DO.meas == "mg/L"){
+                std.Eq.Ox.conc <- exp(7.7117 - 1.31403*
+                                          (log(temp.C + 45.93)))
+                if(is.null(bar.press) == FALSE &&
+                   is.null(elevation.m) == TRUE){
                     if(bar.units == "atm"){
                         bar.press <- bar.press
                     }else if(bar.units == "kpa"){
@@ -156,7 +169,7 @@ Eq.Ox.conc <-
                     }
                 } else if(is.null(bar.press) == TRUE &&
                               is.null(elevation.m) == FALSE){
-                    bar.press <- Barom.Press (elevation.m, units = bar.units)
+                    bar.press <- Barom.Press (elevation.m, units = "atm")
                 }else{
                     stop("EITHER 'elevation.m' or 'barom.press' must be assigned
                          a value. The other argument must be NULL.")
@@ -166,7 +179,7 @@ Eq.Ox.conc <-
                 P.H2Ovap <- exp(11.8571 - (3840.7 / temp.K) - (216961/(temp.K^2)))
                 theta <- 0.000975 - (1.426e-5 * temp.C) +(6.436e-8 * temp.C^2) 
                 
-                Cp <- std.Eq.Ox.conc*bar.press * 
+                Cp <- (std.Eq.Ox.conc*bar.press) * 
                     ((1-(P.H2Ovap/bar.press))*1-(theta*bar.press))/
                     ((1-P.H2Ovap)*(1-theta))
             }else{
@@ -183,9 +196,21 @@ Eq.Ox.conc <-
 get.pcrit <-
     function(data, DO = NULL, MR = NULL, Pcrit.below,
              idx.interval = NULL, index.var = "std.time",
-             start.idx = NULL, stop.idx = NULL, ...){
+             start.idx = NULL, stop.idx = NULL,
+             time.units = "sec",...){
+        
         
         data$DO <- eval(parse(text = paste("data$", DO, sep = "")))
+        
+        
+        ## set time denominator based on specified time.units ##
+        if(time.units == "sec"){
+            t.denom <- 1
+        }else if(time.units == "min"){
+            t.denom <- 60
+        }else if(time.units == "hr"){
+            t.denom <- 3600
+        }
         
         if(any(is.na(data$DO)==T)){
             warning("DO variable contains missing values")
@@ -228,6 +253,7 @@ get.pcrit <-
             
             data <- calc.MRs
             names(data) <- c("DO", "MR")
+            data$MR <- data$MR * t.denom
             
         }else if(is.null(MR) == FALSE){
             data$MR <- eval(parse(text = paste("data$", "MR", sep = "")))
@@ -297,7 +323,7 @@ get.pcrit <-
         below.Pc <- mod.2
         names(below.Pc) <- paste("below",names(below.Pc),
                                  sep=".")
-        Pc<-as.list(c(P.crit, above.Pc,below.Pc))
+        Pc<-as.list(c(P.crit, as.list(above.Pc), as.list(below.Pc)))
         return(Pc)
         names(Pc)
     }
@@ -318,7 +344,7 @@ get.witrox.data <-
         }
         
         if(choose.names==F){
-            d<-read.table(file.choose(), sep=separate, skip=lines.skip,
+            d<-read.table(data.name, sep=separate, skip=lines.skip,
                           header =T,check.names=F)
             invalid.names<-colnames(d)
             valid.names<-make.names(colnames(d))
@@ -361,36 +387,58 @@ MR.loops <-
     function(data, DO.var.name, time.var.name = "std.time",
              in.DO.meas = "mg/L", out.DO.meas = "mg/L",
              start.idx, stop.idx, system.vol = 1,
-             background.consumption = NULL,
-             background.start = NULL, background.end = NULL,
+             background.consumption = 0,
+             background.indices = NULL,
              temp.C, elevation.m = NULL,
-             bar.press = NULL, bar.units = "atm", ...){
+             bar.press = NULL, bar.units = "atm",
+             PP.units, time.units = "sec", ...){
         ## format the time vectors into POSIX ##
         orig = "1970-01-01 00:00:00 UTC"
         start.idx <- as.POSIXct((start.idx), origin = orig)
         stop.idx <- as.POSIXct((stop.idx), origin = orig)
         
+        ## make sure num of start and stop indices agree ##
         if (length(start.idx) != length(stop.idx)){
             stop ("number of start times not equal
                   to number of stop times")
         }
         
+        
+        ## set time denominator based on specified time.units ##
+        if(time.units == "sec"){
+            t.denom <- 1
+        }else if(time.units == "min"){
+            t.denom <- 60
+        }else if(time.units == "hr"){
+            t.denom <- 3600
+        }
+        
+
         ## set response variable ##
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
         ## set time variable ##
         data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
         
         ## set background DO consumption rate ##
-        if(is.null(background.consumption) == TRUE){
-            bgd.info <- background.resp(DO.var.name = "y", data, 
-                                        time.var.name = "x",
-                                        background.start, background.end)
-            bgd.slope <- bgd.info$mat[2,1]
-        }else if(is.null(background.consumption) == FALSE) {
-            bgd.slope = background.consumption
+        if(is.null(background.indices) == TRUE){
+            bgd.slope.int <- background.consumption
+            bgd.slope.slope <- 0
+                
+        }else if(is.null(background.indices) == FALSE) {
+            if(length(background.indices) < 2){
+                stop("background.indices must be NULL or have a length >= 2")
+            }else{
+                ## if there are multiple background calibrations ##
+                bgd.mod <- lm(background.consumption ~ 
+                                  as.POSIXct(background.indices))
+                bgd.slope.int <- bgd.mod$coefficients[1]
+                bgd.slope.slope <- bgd.mod$coefficients[2]
+            }
+            
         }
         
-        if(is.null(bar.press) == FALSE && is.null(elevation.m) == FALSE){
+        if(is.null(bar.press) == FALSE &&
+           is.null(elevation.m) == FALSE){
             stop("Either 'bar.press' or 'elevation.m' should be NULL")
         }
         
@@ -409,7 +457,6 @@ MR.loops <-
             }
         
         
-        
         ## Temperature ##
         if (is.character(temp.C) == TRUE){
             temp.C <- eval(parse(
@@ -423,18 +470,24 @@ MR.loops <-
         # DO sat conversions #
         if (in.DO.meas == "pct"){
             data$y <- (data$y /100) * 
-                Eq.Ox.conc(temp.C, elevation.m,
-                           bar.press, bar.units,
-                           out.DO.meas)
+                Eq.Ox.conc(temp.C = temp.C,
+                           elevation.m = elevation.m,
+                           bar.press = bar.press,
+                           bar.units = bar.units,
+                           out.DO.meas = out.DO.meas)
         }else if (in.DO.meas == "PP"){
             fraction <- data$y / 
-                Eq.Ox.conc(temp.C, elevation.m,
-                           bar.press, bar.units,
+                Eq.Ox.conc(temp.C = temp.C,
+                           elevation.m = elevation.m,
+                           bar.press = bar.press,
+                           bar.units = bar.units,
                            out.DO.meas = "PP")
             data$y <- fraction *
-                Eq.Ox.conc(temp.C, elevation.m,
-                           bar.press, bar.units,
-                           out.DO.meas)
+                Eq.Ox.conc(temp.C = temp.C,
+                           elevation.m = elevation.m,
+                           bar.press = bar.press,
+                           bar.units = bar.units,
+                           out.DO.meas = out.DO.meas)
         }else if(in.DO.meas == "mg/L"){
             data$y <- data$y
         }else{
@@ -442,31 +495,60 @@ MR.loops <-
                  must be 'pct', 'PP', or 'mg/L' ")
         }
         
-        data$y <- system.vol * data$y
-        # Now data$y in units of mg #
+        if(out.DO.meas == "mg/L"){
+            data$y <- system.vol * data$y
+            # Now data$y in units of mg, not mg/L #
+        }else if(out.DO.meas == "PP"){
+            # converting MR to PP units #
+            data$y <- DO.unit.convert(x = data$y,
+                                      DO.units.in = "mg/L",
+                                      DO.units.out = "PP",
+                                      bar.units.in = "atm",
+                                      bar.units.out = PP.units)
+        }else if(out.DO.meas == "pct"){
+            data$y <- fraction * 100
+        }
         
-        data$adj.y <- data$y - (as.numeric(data$x) -
-                      as.numeric(start.idx[1]))*bgd.slope
+        ## the following loop adds adj.y as a variable.     ##
+        ## it adjusts DO level by iincorporating background ##
+        ## respiration rate.                                ##
+        
+        data$adj.y <- rep(0, length(data[,1]))
+        tab.wid <- length(data[1,])
+        data.new <- NULL
+        
+        for(i in 1:length(start.idx)){
+            
+            dsn <- data[data$x >= as.POSIXct(start.idx[i]) &
+                            data$x <= as.POSIXct(stop.idx[i]), ]
+            dsn$adj.y <- dsn$y- ((as.numeric(dsn$x) -
+                          as.numeric(start.idx[i]))*
+                          ((as.numeric(dsn$x) * bgd.slope.slope) +
+                          bgd.slope.int))
+            
+            data.new <- rbind(data.new, dsn)
+        }
+
         
         plot(adj.y ~ x,
-             data = data[(data$x >= start.idx[1] - 600) &
-                    data$x <= (tail(stop.idx,1) + 600),],
+             data = data.new[(data.new$x >= start.idx[1] - 600) &
+                    data.new$x <= (tail(stop.idx,1) + 600),],
                     type="n",...)
         
         name.num<-as.character(c(1:length(start.idx)))
         ms<-list()
         MR.summary<-data.frame()
         for(i in 1:length(start.idx)){
-            dat <- data[data$x >= start.idx[i]
-                        & data$x <= stop.idx[i],]
+            dat <- data.new[data.new$x >= start.idx[i]
+                        & data.new$x <= stop.idx[i],]
             
-            dat$y <- dat$y - (as.numeric(dat$x-
-                                             as.numeric(start.idx[i]))*bgd.slope )
+            # dat$y <- dat$y - (as.numeric(dat$x-
+            #                     as.numeric(start.idx[i]))*bgd.slope )
             
-            mk <- biglm(y ~ x, dat)
+            mk <- biglm(adj.y ~ x, dat)
             ms[[i]] <- mk
             
-            points(dat$x, dat$y)
+            points(dat$x, dat$adj.y)
             names(ms[[i]])<-paste(names(ms[[i]]), name.num[i], sep=".")
             abline(coef(ms[[i]]),
                    col="red",  lwd = 2)
@@ -477,7 +559,11 @@ MR.loops <-
             mrrow <- t(c(MR, sds, rsquare))
             MR.summary <- rbind(MR.summary,mrrow)
         }
+    
         names(MR.summary) <- c("MR", "sd.slope", "r.square")
+        MR.summary[,c(1,2)] <- MR.summary[,c(1,2)] * t.denom
+        
+        
         ofthejedi <- list(MR.summary, ms)
         names(ofthejedi) <- c("MR.summary", "lm.details")
         return(ofthejedi)
@@ -530,3 +616,4 @@ tot.rss <-
 #'@import biglm
 #'
 
+system("R CMD Rd2pdf --force --output=./rMRdocumentation.pdf ." )

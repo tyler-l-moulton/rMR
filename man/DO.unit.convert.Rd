@@ -5,10 +5,11 @@
 Convert between different common units of DO concentration
 }
 \description{
-This function converts between different different units of DO concentration. Takes into account temperature ambient pressure.
+This function converts between different different units of DO concentration. Takes into account ambient temperature and pressure.
 }
 \usage{
-DO.unit.convert(x, DO.units.in, DO.units.out, bar.units.in, bar.press, temp.C, bar.units.out)
+DO.unit.convert(x, DO.units.in, DO.units.out, bar.units.in,
+bar.press, temp.C, bar.units.out = "mmHg")
 }
 
 \arguments{
@@ -60,15 +61,15 @@ Use this function on entire data columns to convert them to desired units before
 \code{\link{plot}}, 
 \code{\link{plot.raw}}, 
 \code{\link{cbind}}, 
-
+\code{\link{Eq.Ox.conc}}, 
+\code{\link{DO.saturation}}, 
 }
 \examples{
 ## on a single value ##
 
 DO.pct<- DO.unit.convert(x= 125.6863, DO.units.in = "PP",
                 DO.units.out = "pct",
-                bar.units.in = "mmHg", bar.press = 750, temp.C =15,
-                bar.units.out = "mmHg")
+                bar.units.in = "mmHg", bar.press = 750, temp.C =15)
 
 ## Apply to a column in a 'data.frame' class object ## 
 
@@ -80,13 +81,21 @@ head(fishMR)
 #that there is an instantaneous temperature column
 #(temp.C) and a pressure column (Bar.Pressure.hpa)
 
-DO.pct.col <- DO.unit.convert(fishMR$DO.mgL, DO.units.in = "mg/L",
+DO.pct.col.a <- DO.unit.convert(fishMR$DO.mgL, DO.units.in = "mg/L",
                 DO.units.out = "pct",
                 bar.units.in = "kpa", bar.press = 101.3,
                 temp.C = fishMR$temp.C,
                 bar.units.out = "kpa")
+DO.pct.col.b<- DO.unit.convert(fishMR$DO.mgL, DO.units.in = "mg/L",
+                DO.units.out = "pct",
+                bar.units.in = "kpa", bar.press = 101.3,
+                temp.C = fishMR$temp.C)
+head(DO.pct.col.a)
+head(DO.pct.col.b)
 
-fishMR2 <- cbind(fishMR, DO.pct.col)
+# Now with df #
+
+fishMR2 <- cbind(fishMR, DO.pct.col.a)
 
 par(mfrow = c(1,2))
 plot.raw(data = fishMR, DO.var.name = "DO.mgL",
@@ -97,7 +106,7 @@ plot.raw(data = fishMR, DO.var.name = "DO.mgL",
           ylab = "DO (mg/L)")
           
 
-plot.raw(data = fishMR2, DO.var.name = "DO.pct.col",
+plot.raw(data = fishMR2, DO.var.name = "DO.pct.col.a",
           start.time = "2015-07-03 06:15:00",
           end.time = "2015-07-03 08:05:00",
           main = "DO (percent saturation) vs time",

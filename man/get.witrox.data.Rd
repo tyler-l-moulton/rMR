@@ -1,6 +1,6 @@
 \name{get.witrox.data}
 \alias{get.witrox.data}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Load data from AutoResp software generated txt files
 }
@@ -8,12 +8,15 @@ Load data from AutoResp software generated txt files
 Allows user to import data from loligo autoresp software text files into a R data.frame (class data.frame)
 }
 \usage{
-get.witrox.data(lines.skip, delimit = "tab", 
+get.witrox.data(data.name, lines.skip, delimit = "tab", 
 choose.names = F, chosen.names = NULL, 
 format)
 }
 
 \arguments{
+  \item{data.name}{
+  Data file name as character string.
+  }
   \item{lines.skip}{
 The lines in the header to be skipped. If choose.names = FALSE, then skip all lines up to the column names. If choose.names =TRUE, skip all lines including column names.
 }
@@ -46,6 +49,19 @@ Tyler L. Moulton
 \code{\link{as.POSIXct}},
 }
 \examples{
-# Requires a text file....
+# Requires a text file. Download fish_MR.txt from github repository.
+# https://github.com/tyler-l-moulton/rMR
+#
+
+#specify chosen.names for header
+data.names <- c("date.time","timestamp", "pres.hpa", "CH1.phase",
+                "CH1.temp", "CH1.DO.mgl")
+
+##Un-comment the following 4 lines 
+# d <- get.witrox.data ("fish_MR.txt", lines.skip = 10,
+#                     choose.names = TRUE,
+#                     chosen.names = data.names,
+#                     format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
+
 }
 
