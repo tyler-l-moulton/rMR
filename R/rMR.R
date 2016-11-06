@@ -22,13 +22,15 @@ background.resp <-
                              data$x <= end.time] 
         }
         
-        
+        #calculate lm for background rate
         m1 <- biglm(y ~ x, data)
         
         MR1 <- coef(m1)[2]
+        
         if (MR1>=0){warning("slope control 1 negative")}
         plot(y ~ x, data,...)
         abline(coefficients(m1), col="red", lwd=2.5)
+        
         return(summary(m1))
     }
 
@@ -256,7 +258,7 @@ get.pcrit <-
             data$MR <- data$MR * t.denom
             
         }else if(is.null(MR) == FALSE){
-            data$MR <- eval(parse(text = paste("data$", "MR", sep = "")))
+            data$MR <- eval(parse(text = paste("data$", MR, sep = "")))
         }
         
         
@@ -616,4 +618,4 @@ tot.rss <-
 #'@import biglm
 #'
 
-system("R CMD Rd2pdf --force --output=./rMRdocumentation.pdf ." )
+
