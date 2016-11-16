@@ -36,6 +36,8 @@ Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a 
 
 Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907.
 
+http://www.loligosystems.com/
+
 https://en.wikipedia.org/wiki/Barometric_formula
 
 http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html

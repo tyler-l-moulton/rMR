@@ -199,7 +199,7 @@ get.pcrit <-
     function(data, DO = NULL, MR = NULL, Pcrit.below,
              idx.interval = NULL, index.var = "std.time",
              start.idx = NULL, stop.idx = NULL,
-             time.units = "sec",...){
+             time.units = "sec", Pcrit.type = "both",...){
         
         
         data$DO <- eval(parse(text = paste("data$", DO, sep = "")))
@@ -284,7 +284,11 @@ get.pcrit <-
         }
         
         DO.idx <- RSS.table[RSS.table$RSS == min(RSS.table$RSS), 2]
-        
+        idx.rname <- row.names(RSS.table[RSS.table[,2] == DO.idx,])
+        DO.idx.low <- RSS.table[row.names(RSS.table) == 
+                                    (as.numeric(idx.rname)-1), 2]
+
+        midpoint.approx <- mean(c(DO.idx, DO.idx.low))
         
         
         ##creating linear models##
@@ -300,7 +304,7 @@ get.pcrit <-
         adjr2.pre <- sm1$adj.r.squared
         adjr2.post <- sm2$adj.r.squared
         
-        ## Plot ##
+        ## Plot: line intersect##
         
         plot(MR~DO, data, type= "n", ...)
         points(x = c(dat1$DO, dat2$DO), y = c(dat1$MR, dat2$MR), 
@@ -312,22 +316,36 @@ get.pcrit <-
             abline(mod.1$coefficients[1], 0)
         }else{abline(coef = mod.1$coefficients, col="red", lwd = 1.5, ...)}
         abline(coef = mod.2$coefficients, col = "red", lwd = 1.5, ...)
+        
         points(x = intersect, y = mod.1$coefficients[1] +
                    mod.1$coefficients[2]*intersect, pch=21,
                col = "blue", cex=1.5)
+        
+        if (Pcrit.type == "lm" | Pcrit.type == "both"){
+            abline(v = intersect, col = "blue", lwd = 1.5,...)            
+        }
+        if (Pcrit.type == "midpoint" | Pcrit.type == "both"){
+            abline(v = midpoint.approx, col = "lightblue", lwd = 1.5,...)            
+        }
+        
+
+        
+        
         dat.pre<-data[data$DO>=(2*intersect),]
         
-        P.crit<-as.data.frame(cbind(intersect, adjr2.pre, adjr2.post))
-        names(P.crit)<-c("Pcrit", "Adj.r2.above", "Adj.r2.below")
-        above.Pc <- mod.1
-        names(above.Pc) <- paste("above",names(above.Pc),
-                                 sep=".")
-        below.Pc <- mod.2
-        names(below.Pc) <- paste("below",names(below.Pc),
-                                 sep=".")
-        Pc<-as.list(c(P.crit, as.list(above.Pc), as.list(below.Pc)))
+        P.crit<-as.data.frame(cbind(intersect, midpoint.approx,
+                                    adjr2.pre, adjr2.post))
+        names(P.crit)<-c("Pcrit.lm", "Pcrit.midpoint",
+                         "Adj.r2.above", "Adj.r2.below")
+
+        above.Pc <- list(mod.1)
+        names(above.Pc) <- "above"
+        below.Pc <- list(mod.2)
+        names(below.Pc) <- "below"
+        
+        Pc<-c(P.crit, above.Pc, below.Pc)
         return(Pc)
-        names(Pc)
+        
     }
 #'@export
 #'@import biglm
