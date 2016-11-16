@@ -11,7 +11,7 @@ Determines the critical point of a rate process based on the broken stick model 
 get.pcrit(data, DO = NULL, MR = NULL,
 Pcrit.below, idx.interval = NULL,
 index.var = "std.time", start.idx = NULL,
-stop.idx = NULL, time.units = "sec"...)
+stop.idx = NULL, time.units = "sec", Pcrit.type = "both",...)
 }
 \arguments{
   \item{data}{
