@@ -59,13 +59,18 @@ Barom.Press <-
 #'
 DO.saturation <-
     function(DO.mgl, temp.C, elevation.m = NULL,
-             bar.press = NULL, bar.units = NULL){
+             bar.press = NULL, bar.units = NULL,
+             salinity = 0 , salinity.units = "pp.thou"){
         if(is.null(bar.press) == TRUE){
             DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, elevation.m = elevation.m,
-                                         bar.press = NULL, bar.units=NULL)   
+                                         bar.press = NULL, bar.units=NULL,
+                                         salinity = salinity,
+                                         salinity.units = salinity.units)   
         }else{
-            DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, elevation.m = elevation.m,
-                                         bar.press, bar.units=bar.units) 
+            DO.sat<- DO.mgl / Eq.Ox.conc(temp.C, bar.press = bar.press,
+                                         bar.units = bar.units,
+                                         salinity = salinity,
+                                         salinity.units = salinity.units) 
         }
         
         return(DO.sat)
@@ -78,7 +83,8 @@ DO.saturation <-
 DO.unit.convert <-
     function(x, DO.units.in, DO.units.out, 
              bar.units.in, bar.press, temp.C,
-             bar.units.out = "mmHg"){
+             bar.units.out = "mmHg",
+             salinity = 0 , salinity.units = "pp.thou"){
         if(bar.units.in == bar.units.out){
             bar.press <- bar.press
         }else if(bar.units.in == "atm"){
@@ -112,7 +118,9 @@ DO.unit.convert <-
         }else{
             eq.o2.in <- Eq.Ox.conc(temp.C, bar.units = bar.units.out, 
                                    bar.press =bar.press,
-                                   out.DO.meas = DO.units.in)
+                                   out.DO.meas = DO.units.in,
+                                   salinity = salinity,
+                                   salinity.units = salinity.units)
             DO.pct <- x / eq.o2.in
         }
         
@@ -121,7 +129,9 @@ DO.unit.convert <-
         }else{
             eq.o2.out <- Eq.Ox.conc(temp.C, bar.units = bar.units.out,
                                     bar.press = bar.press,
-                                    out.DO.meas = DO.units.out)
+                                    out.DO.meas = DO.units.out,
+                                    salinity = salinity,
+                                    salinity.units = salinity.units)
             DO.conc <- DO.pct * eq.o2.out
         }
         
@@ -130,10 +140,13 @@ DO.unit.convert <-
 #'@export
 #'@import biglm
 #'
+
 Eq.Ox.conc <-
     function(temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = NULL,
-             out.DO.meas = "mg/L"){
+             out.DO.meas = "mg/L", salinity = 0,
+             salinity.units = "pp.thou"){
+        
         if(is.null(elevation.m) == FALSE &&
            is.null(bar.units) == FALSE){
             stop("'bar.units' must be NULL if 'elevation.m' is assigned a value. ")
@@ -144,7 +157,7 @@ Eq.Ox.conc <-
             if(is.null(bar.press) == FALSE && is.null(elevation.m) == TRUE){
                 bar.press <- bar.press
             } else if(is.null(bar.press) == TRUE &&
-                          is.null(elevation.m) == FALSE){
+                      is.null(elevation.m) == FALSE){
                 bar.press <- Barom.Press (elevation.m,
                                           units = bar.units)
             }else{
@@ -152,11 +165,11 @@ Eq.Ox.conc <-
                      a value. The other argument must be NULL.")
             }
 
-            Cp <-bar.press*0.20946 
+                DO <- bar.press*0.20946
             
-        }else if (out.DO.meas == "mg/L"){
-                std.Eq.Ox.conc <- exp(7.7117 - 1.31403*
-                                          (log(temp.C + 45.93)))
+            
+            }else if (out.DO.meas == "mg/L"){
+                
                 if(is.null(bar.press) == FALSE &&
                    is.null(elevation.m) == TRUE){
                     if(bar.units == "atm"){
@@ -167,30 +180,57 @@ Eq.Ox.conc <-
                         bar.press <- bar.press / 760
                     }else{
                         stop("invalid pressure units, must be
-                         'atm', 'kpa', or 'mmHg'")
+                             'atm', 'kpa', or 'mmHg'")
                     }
-                } else if(is.null(bar.press) == TRUE &&
+                    } else if(is.null(bar.press) == TRUE &&
                               is.null(elevation.m) == FALSE){
-                    bar.press <- Barom.Press (elevation.m, units = "atm")
-                }else{
-                    stop("EITHER 'elevation.m' or 'barom.press' must be assigned
-                         a value. The other argument must be NULL.")
-                }
+                        bar.press <- Barom.Press (elevation.m, units = "atm")
+                    }else{
+                        stop("EITHER 'elevation.m' or 'barom.press' must be assigned
+                             a value. The other argument must be NULL.")
+                    }
+                ## Benson and Krause eqns, USGS 2011 ##
+                tk <- 273.15 + temp.C
+                A1 <- -139.34411
+                A2 <- 1.575701e5
+                A3 <- 6.642308e7
+                A4 <- 1.243800e10
+                A5 <- 8.621949e11
+
+                DO <- exp(A1 + (A2/tk) -
+                                  (A3/(tk^2)) +
+                                  (A4/(tk^3)) -
+                                  (A5/(tk^4)))
                 
-                temp.K <- 273.15 + temp.C
-                P.H2Ovap <- exp(11.8571 - (3840.7 / temp.K) - (216961/(temp.K^2)))
-                theta <- 0.000975 - (1.426e-5 * temp.C) +(6.436e-8 * temp.C^2) 
-                
-                Cp <- (std.Eq.Ox.conc*bar.press) * 
-                    ((1-(P.H2Ovap/bar.press))*1-(theta*bar.press))/
-                    ((1-P.H2Ovap)*(1-theta))
             }else{
                 stop("must specify 'out.DO.meas' as 'mg/L' or 'PP'")
             }
-        
-        return(Cp)
-    }
+                # salinity factor #
+                if(salinity.units == "uS"){
+                    sal <- salinity*5.572e-4 + (salinity^2)*2.02e-9 
+                }else if(salinity.units == "pp.thou"){
+                    sal <- salinity
+                }else{
+                    stop("salinity.units must be 'uS' or 'pp.thou'")
+                }
+                
+                Fs <- exp(-sal*(0.017674 - (10.754/tk) + (2140.7/(tk^2))))
+                
+                ## Pressure factor determination ##
+                theta <- 0.000975 - 
+                    temp.C*1.426e-5 +
+                    (temp.C^2)*6.436e-8
+                
+                u <- exp(11.8571 - (3840.70/tk) - (216961/(tk^2)))
+                
+                # pressure factor #
+                Fp <- ((bar.press - u)*(1-(theta*bar.press))) /
+                      ((1-u)*(1-theta))
+                              
+                Cp <- DO * Fs * Fp
 
+        return(Cp)
+            }
 #'@export
 #'@import biglm
 #'
@@ -494,20 +534,20 @@ MR.loops <-
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas)
+                           out.DO.meas = out.DO.meas,...)
         }else if (in.DO.meas == "PP"){
             fraction <- data$y / 
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = "PP")
+                           out.DO.meas = "PP",...)
             data$y <- fraction *
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas)
+                           out.DO.meas = out.DO.meas,...)
         }else if(in.DO.meas == "mg/L"){
             data$y <- data$y
         }else{
@@ -524,7 +564,7 @@ MR.loops <-
                                       DO.units.in = "mg/L",
                                       DO.units.out = "PP",
                                       bar.units.in = "atm",
-                                      bar.units.out = PP.units)
+                                      bar.units.out = PP.units,...)
         }else if(out.DO.meas == "pct"){
             data$y <- fraction * 100
         }
@@ -561,9 +601,7 @@ MR.loops <-
         for(i in 1:length(start.idx)){
             dat <- data.new[data.new$x >= start.idx[i]
                         & data.new$x <= stop.idx[i],]
-            
-            # dat$y <- dat$y - (as.numeric(dat$x-
-            #                     as.numeric(start.idx[i]))*bgd.slope )
+
             
             mk <- biglm(adj.y ~ x, dat)
             ms[[i]] <- mk
