@@ -24,6 +24,7 @@ Maintainer: Tyler L. Moulton <tyler.moulton@mail.mcgill.ca>
 
 }
 \references{
+Benson, B.B., and Daniel Krause, Jr, 1980, The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671
 Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media, 2012.
 
 Lumley, Thomas. "biglm: bounded memory linear and generalized linear models". 0.9-1. https://CRAN.R-project.org/package=biglm. 2013.
@@ -34,13 +35,13 @@ Mechtly, E. A., 1973: The International System of Units, Physical Constants and 
 
 Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11 (2013): 2103-2110.
 
+U.S. Geological Survey, 2011, Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
+
 Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907.
 
 http://www.loligosystems.com/
 
-https://en.wikipedia.org/wiki/Barometric_formula
 
-http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 }
 \keyword{ package }
 \seealso{

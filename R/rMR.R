@@ -451,8 +451,7 @@ MR.loops <-
              background.indices = NULL,
              temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = "atm",
-             PP.units, time.units = "sec", 
-             salinity = 0 , salinity.units = "pp.thou",...){
+             PP.units, time.units = "sec",...){
         ## format the time vectors into POSIX ##
         orig = "1970-01-01 00:00:00 UTC"
         start.idx <- as.POSIXct((start.idx), origin = orig)
@@ -535,26 +534,20 @@ MR.loops <-
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas,
-                           salinity = salinity, 
-                           salinity.units = salinity.units)
+                           out.DO.meas = out.DO.meas)
         }else if (in.DO.meas == "PP"){
             fraction <- data$y / 
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = "PP",
-                           salinity = salinity, 
-                           salinity.units = salinity.units)
+                           out.DO.meas = "PP")
             data$y <- fraction *
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas,
-                           salinity = salinity, 
-                           salinity.units = salinity.units)
+                           out.DO.meas = out.DO.meas)
         }else if(in.DO.meas == "mg/L"){
             data$y <- data$y
         }else{
@@ -571,9 +564,7 @@ MR.loops <-
                                       DO.units.in = "mg/L",
                                       DO.units.out = "PP",
                                       bar.units.in = "atm",
-                                      bar.units.out = PP.units,
-                                      salinity = salinity, 
-                                      salinity.units = salinity.units)
+                                      bar.units.out = PP.units)
         }else if(out.DO.meas == "pct"){
             data$y <- fraction * 100
         }
