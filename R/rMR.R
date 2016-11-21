@@ -146,7 +146,7 @@ Eq.Ox.conc <-
              bar.press = NULL, bar.units = NULL,
              out.DO.meas = "mg/L", salinity = 0,
              salinity.units = "pp.thou"){
-        
+        tk <- 273.15 + temp.C
         if(is.null(elevation.m) == FALSE &&
            is.null(bar.units) == FALSE){
             stop("'bar.units' must be NULL if 'elevation.m' is assigned a value. ")
@@ -190,7 +190,7 @@ Eq.Ox.conc <-
                              a value. The other argument must be NULL.")
                     }
                 ## Benson and Krause eqns, USGS 2011 ##
-                tk <- 273.15 + temp.C
+                
                 A1 <- -139.34411
                 A2 <- 1.575701e5
                 A3 <- 6.642308e7
@@ -451,7 +451,8 @@ MR.loops <-
              background.indices = NULL,
              temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = "atm",
-             PP.units, time.units = "sec", ...){
+             PP.units, time.units = "sec", 
+             salinity = 0 , salinity.units = "pp.thou",...){
         ## format the time vectors into POSIX ##
         orig = "1970-01-01 00:00:00 UTC"
         start.idx <- as.POSIXct((start.idx), origin = orig)
@@ -534,20 +535,26 @@ MR.loops <-
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas,...)
+                           out.DO.meas = out.DO.meas,
+                           salinity = salinity, 
+                           salinity.units = salinity.units)
         }else if (in.DO.meas == "PP"){
             fraction <- data$y / 
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = "PP",...)
+                           out.DO.meas = "PP",
+                           salinity = salinity, 
+                           salinity.units = salinity.units)
             data$y <- fraction *
                 Eq.Ox.conc(temp.C = temp.C,
                            elevation.m = elevation.m,
                            bar.press = bar.press,
                            bar.units = bar.units,
-                           out.DO.meas = out.DO.meas,...)
+                           out.DO.meas = out.DO.meas,
+                           salinity = salinity, 
+                           salinity.units = salinity.units)
         }else if(in.DO.meas == "mg/L"){
             data$y <- data$y
         }else{
@@ -564,7 +571,9 @@ MR.loops <-
                                       DO.units.in = "mg/L",
                                       DO.units.out = "PP",
                                       bar.units.in = "atm",
-                                      bar.units.out = PP.units,...)
+                                      bar.units.out = PP.units,
+                                      salinity = salinity, 
+                                      salinity.units = salinity.units)
         }else if(out.DO.meas == "pct"){
             data$y <- fraction * 100
         }
