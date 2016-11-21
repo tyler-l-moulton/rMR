@@ -10,7 +10,8 @@ Calculate the percent saturation of oxygen in water given external temperature, 
 \usage{
 DO.saturation(DO.mgl, temp.C,
 elevation.m = NULL, bar.press = NULL,
-bar.units = NULL)
+bar.units = NULL,
+salinity, salinity.units)
 }
 \arguments{
   \item{DO.mgl}{
@@ -27,6 +28,12 @@ Barometric pressure in user defined units (bar.units)--defaults to 'NULL'. EITHE
 }
   \item{bar.units}{
 Units of barometric pressure, defaults to 'NULL'. must be 'atm', 'kpa' or "mmHg"
+}
+  \item{salinity}{
+    Salinity, either reported in parts per thousand (pp.thou) or microsiemens/cm (us) 
+}
+  \item{salinity.units}{
+    Salinity units, must be "pp.thou" or "us" 
 }
 }
 \details{

@@ -9,7 +9,8 @@ This function converts between different different units of DO concentration. Ta
 }
 \usage{
 DO.unit.convert(x, DO.units.in, DO.units.out, bar.units.in,
-bar.press, temp.C, bar.units.out = "mmHg")
+bar.press, temp.C, bar.units.out = "mmHg",
+salinity = 0, salinity.units = "pp.thou")
 }
 
 \arguments{
@@ -33,6 +34,12 @@ bar.press, temp.C, bar.units.out = "mmHg")
 }
   \item{bar.units.out}{
     Used in internal calculation, only visible if output DO.units.out = "PP". Must take value of "atm", "kpa", or "mmHg"
+}
+  \item{salinity}{
+    Salinity, either reported in parts per thousand (pp.thou) or microsiemens/cm (us) 
+}
+  \item{salinity.units}{
+    Salinity units, must be "pp.thou" or "us" 
 }
 }
 \details{

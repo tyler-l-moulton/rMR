@@ -10,7 +10,8 @@ Determines equilibrium dissolved oxygen concentration in water based on pressure
 \usage{
 Eq.Ox.conc(temp.C, elevation.m = NULL, 
 bar.press = NULL, bar.units = NULL, 
-out.DO.meas = "mg/L")
+out.DO.meas = "mg/L", 
+salinity = 0, salinity.units = "pp.thou")
 }
 
 \arguments{
@@ -29,6 +30,12 @@ out.DO.meas = "mg/L")
   \item{out.DO.meas}{
     Units of dissolved oxygen concentration 
 }
+  \item{salinity}{
+    Salinity, either reported in parts per thousand (pp.thou) or microsiemens/cm (us) 
+}
+  \item{salinity.units}{
+    Salinity units, must be "pp.thou"" or "us" 
+}
 }
 \details{
 }
@@ -40,9 +47,9 @@ Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquati
 
 Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
 
-https://en.wikipedia.org/wiki/Barometric_formula
+U.S. Geological Survey, 2011, Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
 
-http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
+Benson, B.B., and Daniel Krause, Jr, 1980, The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671
 }
 \author{
 Tyler L. Moulton
