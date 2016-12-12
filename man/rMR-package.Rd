@@ -24,20 +24,21 @@ Maintainer: Tyler L. Moulton <tyler.moulton@mail.mcgill.ca>
 
 }
 \references{
-Benson, B.B., and Daniel Krause, Jr, 1980, The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671
-Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media, 2012.
+Benson, B.B., and Daniel Krause, Jr (1980). The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671. DOI: 10.4319/lo.1980.25.4.0662
 
-Lumley, Thomas. "biglm: bounded memory linear and generalized linear models". 0.9-1. https://CRAN.R-project.org/package=biglm. 2013.
+Gnaiger, Erich, and Hellmuth Forstner, eds. (2012). Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media. DOI: 10.1007/ 978-3-642-81863-9
 
-McDonnell, Laura H., and Lauren J. Chapman. "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199 (2016): 62-70.
+Lumley, Thomas (2013). "biglm: bounded memory linear and generalized linear models". 0.9-1. https://CRAN.R-project.org/package=biglm. 
 
-Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
+McDonnell, Laura H., and Lauren J. Chapman (2016). "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199: 62-70. DOI: 10.1016/j.cbpa.2016.05.018
 
-Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11 (2013): 2103-2110.
+Mechtly, E. A. (1973). The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C. URL: https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19730018242.pdf
 
-U.S. Geological Survey, 2011, Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
+Roche, Dominique G., et al. (2013). "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11: 2103-2110. DOI: 10.1242/jeb.082925
 
-Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907.
+U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
+
+Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907. URL: http://www.jstor.org/stable/30157935.
 
 http://www.loligosystems.com/
 
