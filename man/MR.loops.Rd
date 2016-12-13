@@ -60,7 +60,13 @@ Elevation in m. Only required if bar.press = NULL.
 barometric pressure in units defined by bar.units argument. Only required if elevation.m = NULL.
 }
   \item{bar.units}{
-Units of barometric pressure used as input and in output if DO.meas.out = "PP".
+Units of barometric pressure used as input and in output if DO.meas.out = "PP". Acceptable arguments: "mmHg", "atm", "kpa".
+}
+  \item{PP.units}{
+Units of barometric pressure used for "PP". 
+}
+  \item{time.units}{
+Denominator for metabolic rate, also displayed as units on X-axis. Acceptable arguments: "hr", "min", "sec".
 }
   \item{\dots}{
 arguments passed on to internal functions
