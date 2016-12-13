@@ -107,7 +107,7 @@ Pcrit4 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     stop.idx = "2015-07-03 08:05:00",
                     time.units = "hr",
                     ylab = "Met Rate (mg O2 / hour)",
-                    Pcrit.type = NULL)
+                    Pcrit.type = "")
                     
 
 }
