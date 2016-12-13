@@ -44,6 +44,9 @@ Units of time in MR calculation. Defaults to "sec", must be "sec", "min", or "hr
   \item{Pcrit.type}{
 Either "lm" to draw a vertical line at the Pcrit as determined by the intersection point of the best fit lines(Yeager and Ultsch 1989) or "midpoint" as determined by the midpoint between the two points on either side of the Pcrit (Yeager and Ultsch 1989). "both" will plot both as vertical lines on the plot. NULL will plot neither. Both values are returned in the output.
 }
+  \item{\dots}{
+Arguments passed on to internal functions.
+}
 }
 \details{
 This calculates the critical oxygen tension for a change in metabolic rate. It is a simple broken stick model which evaluates the data at dissolved oxygen values < 'Pcrit.below'. The data of MR and DO are ordered by decreasing DO value. Then, the function iteratively calculates the total residual sum of squares (using tot.RSS) of two linear models, one spanning from 'Pcrit.below' to 'Pcrit.below' - i, the other with a range from the minimum DO value to 'Pcrit.below' - (i + 1). The broken stick model resulting in the lowest total residual sum of squares is selected. The Pcrit is the DO value at the intersection point of the broken stick model. This is indicated by a blue circle on the plot.
