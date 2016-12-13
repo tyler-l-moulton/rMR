@@ -34,7 +34,7 @@ background.resp <-
         return(summary(m1))
     }
 
-#'@export
+#'@export background.resp
 biglm::biglm
 
 
@@ -54,7 +54,7 @@ Barom.Press <-
         return(P)
     }
 
-#'@export
+#'@export Barom.Press
 #'@import biglm
 #'
 DO.saturation <-
@@ -75,7 +75,7 @@ DO.saturation <-
         
         return(DO.sat)
     }
-#'@export
+#'@export DO.saturation
 #'@import biglm 
 #'
 
@@ -231,7 +231,7 @@ Eq.Ox.conc <-
 
         return(Cp)
             }
-#'@export
+#'@export DO.unit.convert
 #'@import biglm
 #'
 
@@ -387,7 +387,7 @@ get.pcrit <-
         return(Pc)
         
     }
-#'@export
+#'@export get.pcrit
 #'@import biglm
 #'
 #'
@@ -440,7 +440,7 @@ get.witrox.data <-
         return(d)
         
     }
-#'@export
+#'@export get.witrox.data
 #'@import biglm
 
 MR.loops <-
@@ -627,7 +627,7 @@ MR.loops <-
         return(ofthejedi)
         }
 
-#'@export
+#'@export MR.loops
 #'@import biglm
 
 plot.raw <-
@@ -643,7 +643,7 @@ plot.raw <-
         plot(y~std.time, data, ...)
     }
 
-#'@export
+#'@export plot.raw
 #'@import biglm
 
 sumsq <-
@@ -653,7 +653,7 @@ sumsq <-
         sumsquares<-sum(sq.dev)
         return(sumsquares)
     }
-#'@export
+#'@export sumsq
 #'@import biglm
 #'
 
@@ -670,7 +670,7 @@ tot.rss <-
         trss <- (sumsq(m1$residuals)+sumsq(m2$residuals))
         return(trss)
     }
-#'@export
+#'@export tot.rss
 #'@import biglm
 #'
 
