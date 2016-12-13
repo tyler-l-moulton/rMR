@@ -66,7 +66,6 @@ Tyler L. Moulton
 
 \seealso{
 \code{\link{tot.RSS}},
-\code{\link{tot.RSS}},
 \code{\link{strptime}}, 
 \code{\link{as.POSIXct}},
 }
