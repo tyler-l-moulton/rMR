@@ -29,6 +29,9 @@ Character string specifying left bound x limit in 'strptime' compatable format
   \item{end.time}{
 Character string specifying right bound x limit in 'strptime' compatable format
 }
+  \item{\dots}{
+Arguments passed on to internal functions
+}
 }
 \details{
 start.time and end.time arguments must match the time.var.name column's format for date time.
