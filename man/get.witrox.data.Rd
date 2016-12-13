@@ -57,11 +57,4 @@ Tyler L. Moulton
 data.names <- c("date.time","timestamp", "pres.hpa", "CH1.phase",
                 "CH1.temp", "CH1.DO.mgl")
 
-##Un-comment the following 4 lines 
-# d <- get.witrox.data ("fish_MR.txt", lines.skip = 10,
-#                     choose.names = TRUE,
-#                     chosen.names = data.names,
-#                     format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
-
 }
-

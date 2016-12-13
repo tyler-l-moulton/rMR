@@ -418,13 +418,7 @@ get.witrox.data <-
                                  split = ".")[[1]])
                     split.name.period <- paste(split.name.period, sep="",
                                                collapse="")
-                    split.name <- as.vector(
-                        strsplit(split.name.period, fixed = F,
-                                 split = c("Â"))[[1]])
-                    split.name <- paste(split.name, sep=".", collapse=".")
-                    var.names[i] <-  as.vector(
-                        strsplit(split.name, fixed = F,
-                                 split = c("â"))[[1]])
+
                 }
             }
         }else if(choose.names==T){
