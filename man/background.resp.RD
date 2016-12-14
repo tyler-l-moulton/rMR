@@ -32,9 +32,6 @@ Input endtime as character string of strptime format = "\%Y-\%m-\%d \%H:\%M:\%S"
 Passes on arguments to internal functions
 }
 }
-\details{
-
-}
 \value{
 Returns an object of method 'biglm'. The slope of this funtion is the metabolic rate in input units/(default time).
 }
@@ -45,10 +42,6 @@ Thomas Lumley (2013). biglm: bounded memory linear and generalized linear models
 \author{
 Tyler L. Moulton
 }
-\note{
-
-}
-
 
 \seealso{
  \code{\link{as.POSIXct}},
@@ -61,8 +54,7 @@ data(fishMR)
 bgd.resp <- 
 background.resp(fishMR, "DO.mgL", 
            start.time = "2015-07-02 16:05:00",
-           end.time = "2015-07-02 16:35:00",
-           ylab = "DO (mg/L)", xlab = "time (min)")
+           end.time = "2015-07-02 16:35:00")
 }
 
 

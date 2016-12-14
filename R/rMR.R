@@ -1,6 +1,55 @@
-biglm::biglm
-#'@import biglm
+
+#'@import tools
+paths <- sort(Sys.glob(c("data/fishMR.rda", "data/*.RData")))
+tools::checkRdaFiles(paths)
+
+#'@import graphics
+plot.raw <-
+    function(data, DO.var.name, time.var.name = "std.time",
+             start.time = data$x[1],
+             end.time = data$x[length(data$x)], ...){
+        orig = "1970-01-01 00:00:00 UTC"
+        
+        data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
+        data <- data[data$x >= start.time & data$x <= end.time,]
+        data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
+        
+        x<-data$x
+        y<-data$y
+        plot(x, y, ...)
+    }
+
+#'@export plot.raw
+#'@import stats
+
+sumsq <-
+    function(x){
+        mx<-mean(x)
+        sq.dev<-((x-mx)^2)
+        sumsquares<-sum(sq.dev)
+        return(sumsquares)
+    }
+#'@export sumsq
+#'@import stats
 #'
+
+tot.rss <-
+    function(data, break.pt, xvar, yvar){
+        data$x <- eval(parse(text = paste("data$", xvar, sep="")))
+        data$y <- eval(parse(text = paste("data$", yvar, sep="")))
+        d1 <- data[data$x >= break.pt,]
+        m1 <- lm(d1$y~d1$x)
+        
+        d2 <- data[data$x < break.pt,]
+        m2 <- lm(d2$y~d2$x)
+        
+        trss <- (sumsq(m1$residuals)+sumsq(m2$residuals))
+        return(trss)
+    }
+#'@export tot.rss
+#'@import biglm
+#'@import stats
+
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
@@ -28,15 +77,16 @@ background.resp <-
         MR1 <- coef(m1)[2]
         
         if (MR1>=0){warning("slope control 1 negative")}
-        plot(y ~ x, data,...)
+        x<-data$x
+        y<-data$y
+        plot(x, y, ...)
         abline(coefficients(m1), col="red", lwd=2.5)
         
         return(summary(m1))
     }
 
 #'@export background.resp
-biglm::biglm
-
+#'
 
 Barom.Press <-
     function(elevation.m, units = "atm"){
@@ -55,7 +105,6 @@ Barom.Press <-
     }
 
 #'@export Barom.Press
-#'@import biglm
 #'
 DO.saturation <-
     function(DO.mgl, temp.C, elevation.m = NULL,
@@ -76,7 +125,6 @@ DO.saturation <-
         return(DO.sat)
     }
 #'@export DO.saturation
-#'@import biglm 
 #'
 
 
@@ -138,7 +186,6 @@ DO.unit.convert <-
         return(DO.conc)
     }
 #'@export
-#'@import biglm
 #'
 
 Eq.Ox.conc <-
@@ -233,7 +280,8 @@ Eq.Ox.conc <-
             }
 #'@export DO.unit.convert
 #'@import biglm
-#'
+#'@import stats
+#'@import graphics
 
 get.pcrit <-
     function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
@@ -336,10 +384,10 @@ get.pcrit <-
         
         ##creating linear models##
         dat1 <- data[data$DO > DO.idx,]
-        mod.1 <- lm(dat1$MR~dat1$DO)
+        mod.1 <- lm(MR~DO, data=dat1)
         
         dat2 <- data[data$DO <= DO.idx,]
-        mod.2 <- lm(dat2$MR ~ dat2$DO)
+        mod.2 <- lm(MR~DO, data=dat2)
         
         sm1 <- summary(mod.1)
         sm2 <- summary(mod.2)
@@ -391,7 +439,7 @@ get.pcrit <-
         
     }
 #'@export get.pcrit
-#'@import biglm
+#'@import utils
 #'
 #'
 get.witrox.data <-
@@ -439,6 +487,8 @@ get.witrox.data <-
     }
 #'@export get.witrox.data
 #'@import biglm
+#'@import stats
+#'@import graphics
 
 MR.loops <-
     function(data, DO.var.name, time.var.name = "std.time",
@@ -586,11 +636,12 @@ MR.loops <-
             data.new <- rbind(data.new, dsn)
         }
 
-        
-        plot(adj.y ~ x,
-             data = data.new[(data.new$x >= start.idx[1] - 600) &
-                    data.new$x <= (tail(stop.idx,1) + 600),],
-                    type="n",...)
+        data <- data.new[(data.new$x >= start.idx[1] - 600) &
+                            data.new$x <= (tail(stop.idx,1) + 600),]
+        x<-data$x
+        y<-data$y
+        type="n"
+        plot(x, y, ...)
         
         name.num<-as.character(c(1:length(start.idx)))
         ms<-list()
@@ -600,7 +651,7 @@ MR.loops <-
                         & data.new$x <= stop.idx[i],]
 
             
-            mk <- biglm(adj.y ~ x, dat)
+            mk <- biglm(adj.y ~ x, data=dat)
             ms[[i]] <- mk
             
             points(dat$x, dat$adj.y)
@@ -625,7 +676,7 @@ MR.loops <-
         }
 
 #'@export MR.loops
-#'@import biglm
+#'@import graphics
 
 plot.raw <-
     function(data, DO.var.name, time.var.name = "std.time",
@@ -637,38 +688,11 @@ plot.raw <-
         data <- data[data$x >= start.time & data$x <= end.time,]
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
         
-        plot(y~std.time, data, ...)
+        x<-data$x
+        y<-data$y
+        plot(x, y, ...)
     }
 
 #'@export plot.raw
-#'@import biglm
-
-sumsq <-
-    function(x){
-        mx<-mean(x)
-        sq.dev<-((x-mx)^2)
-        sumsquares<-sum(sq.dev)
-        return(sumsquares)
-    }
-#'@export sumsq
-#'@import biglm
-#'
-
-tot.rss <-
-    function(data, break.pt, xvar, yvar){
-        data$x <- eval(parse(text = paste("data$", xvar, sep="")))
-        data$y <- eval(parse(text = paste("data$", yvar, sep="")))
-        d1 <- data[data$x >= break.pt,]
-        m1 <- lm(d1$y~d1$x)
-        
-        d2 <- data[data$x < break.pt,]
-        m2 <- lm(d2$y~d2$x)
-        
-        trss <- (sumsq(m1$residuals)+sumsq(m2$residuals))
-        return(trss)
-    }
-#'@export tot.rss
-#'@import biglm
-#'
 
 

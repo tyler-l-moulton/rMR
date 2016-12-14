@@ -35,13 +35,7 @@ http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 \author{
 Tyler L. Moulton
 }
-\note{
 
-}
-
-\seealso{
-
-}
 \examples{
 bar.pressure1 <- Barom.Press(elevation.m = 1000) # returns "atm"
 bar.pressure2 <- Barom.Press(elevation.m = 1000, "kpa")

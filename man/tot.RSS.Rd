@@ -25,20 +25,15 @@ The x-variable in the data frame for broken stick model.
 The y-variable in the data frame for broken stick model.
 }
 }
-\details{
-}
 \value{
 The residual sum of squares of a broken stick model with a specified break point.
-}
-\references{
 }
 \author{
 Tyler L. Moulton
 }
-\note{
-}
 \seealso{
 code{\link{sumsq}}
+code{\link{get.pcrit}}
 }
 \examples{
 ## load data ##

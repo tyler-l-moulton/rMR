@@ -22,17 +22,8 @@ Internal function for package
 \value{
 The sum of squares of the vector
 }
-\references{
-}
 \author{
 Tyler L. Moulton
-}
-\note{
-
-}
-
-\seealso{
-
 }
 \examples{
 vec <- sample(c(100:120), 50, replace = TRUE)

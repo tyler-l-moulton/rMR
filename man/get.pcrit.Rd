@@ -60,10 +60,6 @@ Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformatio
 \author{
 Tyler L. Moulton
 }
-\note{
-
-}
-
 \seealso{
 \code{\link{tot.RSS}},
 \code{\link{strptime}}, 

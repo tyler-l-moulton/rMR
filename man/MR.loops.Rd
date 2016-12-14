@@ -72,9 +72,6 @@ Denominator for metabolic rate, also displayed as units on X-axis. Acceptable ar
 arguments passed on to internal functions
 }
 }
-\details{
-
-}
 \value{
 Returns a list of 2. $MR.summary is a 'data.frame' with 3 columns: $MR (metabolic rate in user specified units, this is the same as the slope in each linear model), $sd.slope (standard deviation of slopes calculation), $r.square (adjusted r square value from each model). This second object is a list of 'biglm' objects, each one representing a metabolic "loop" (see McDonnell and Chapman 2016). 
 }
@@ -87,10 +84,6 @@ Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a 
 \author{
 Tyler L. Moulton
 }
-\note{
-
-}
-
 \seealso{
  \code{\link{as.POSIXct}},
  \code{\link{strptime}},

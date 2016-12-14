@@ -37,8 +37,6 @@ salinity = 0, salinity.units = "pp.thou")
     Salinity units, must be "pp.thou"" or "us" 
 }
 }
-\details{
-}
 \value{
 Returns object of class numberic of full equilibrium dissolved oxygen concentration.
 }
@@ -54,9 +52,7 @@ Benson, B.B., and Daniel Krause, Jr, 1980, The concentration and isotopic fracti
 \author{
 Tyler L. Moulton
 }
-\note{
 
-}
 \seealso{
  \code{\link{DO.saturation}}
  \code{\link{DO.unit.convert}}

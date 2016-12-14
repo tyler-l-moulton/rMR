@@ -39,14 +39,8 @@ start.time and end.time arguments must match the time.var.name column's format f
 \value{
 Plot showing the overall metabolic data
 }
-\references{
-
-}
 \author{
 Tyler L. Moulton
-}
-\note{
-
 }
 
 \seealso{

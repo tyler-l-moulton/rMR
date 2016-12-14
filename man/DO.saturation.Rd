@@ -36,27 +36,25 @@ Units of barometric pressure, defaults to 'NULL'. must be 'atm', 'kpa' or "mmHg"
     Salinity units, must be "pp.thou" or "us" 
 }
 }
-\details{
 
-}
-\value{
+    \value{
 Returns numeric value of dissolved oxygen saturation.
 }
-\references{
+    \references{
+Mechtly, E. A. (1973). The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C. URL: https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19730018242.pdf
 
+U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
 }
-\author{
+    \author{
 Tyler L. Moulton
 }
-\note{
-}
 
 
-\seealso{
-\code{\link{Eq.Ox.conc}},
-\code{\link{DO.unit.convert}}, 
+    \seealso{
+    \code{\link{Eq.Ox.conc}},
+    \code{\link{DO.unit.convert}}, 
 }
-\examples{
+    \examples{
 DO.sat1 <- DO.saturation(DO.mgl = 5.5,
 temp.C = 20, elevation.m = 1000)
 
@@ -68,4 +66,3 @@ DO.sat2
 
 # Will ya look at that...
 }
-

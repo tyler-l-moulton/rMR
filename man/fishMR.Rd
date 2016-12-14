@@ -19,13 +19,7 @@ This is a dataset acquired duirng a respirometry trial on a mormyrid of the spec
     \item{\code{DO.mgL}}{a numeric vector}
     \item{\code{std.time}}{a POSIXct}
   }
-}
-\details{
-
-}
-\source{
-
-}
+  }
 \references{
 Moulton Tyler L., Chapman Lauren J., Krahe Rudiger. Manuscript in Prep.
 
