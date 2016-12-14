@@ -266,7 +266,7 @@ get.pcrit <-
 
         
         
-        if(any(is.na(data$DO)==T)){
+        if(any(is.na(data$DO)==TRUE)){
             warning("DO variable contains missing values")
         }
          
@@ -672,8 +672,3 @@ tot.rss <-
 #'
 
 
-
-pack <- "rMR"
-path <- find.package(pack)
-system(paste(shQuote(file.path(R.home("bin"), "R")),
-             "CMD", "Rd2pdf", shQuote(path)))

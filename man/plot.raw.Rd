@@ -10,7 +10,7 @@ A good way to visualize your respiro data to get an idea of where to set up the 
 \usage{
 plot.raw(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
-             end.time = data$x[length(data$x)])
+             end.time = data$x[length(data$x)],...)
 }
 
 \arguments{

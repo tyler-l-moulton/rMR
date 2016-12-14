@@ -20,7 +20,7 @@ Data to be used.
   \item{DO.var.name}{
 Variable name of oxygen concentration variable, formatted as character string. To be used for determination of critical point. Requires 'time.interval' to be specified.
 }
-  \item{MR}{
+  \item{MR.var.name}{
 Metabolic rate variable name, formatted as character. Default = 'NULL'. Cannot have value unless DO = 'NULL'.
 }
   \item{Pcrit.below}{
@@ -30,7 +30,7 @@ Metabolic rate variable name, formatted as character. Default = 'NULL'. Cannot h
     If MR = NULL, specify interval in seconds over which to calculate instantaneous MR.
 }
   \item{time.var}{
-    Column name for indexing(time) variable used to calculate instantaneous Metabolic Rate (MR) from oxygen concentration data specified by DO.var.name.
+    Column name for indexing(time) variable used to calculate instantaneous Metabolic Rate (MR) from oxygen concentration data (specified by DO.var.name). Must be a character string.
 }
   \item{start.time}{
     Beginning of time interval over which to evaluate data for Pcrit. Required if MR.var.name = NULL.
@@ -76,6 +76,7 @@ data(fishMR)
 
 Pcrit1 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     Pcrit.below = 2,
+                    time.var = "std.time",
                     time.interval = 120,
                     start.time = "2015-07-03 06:15:00",
                     stop.time = "2015-07-03 08:05:00")
@@ -84,6 +85,7 @@ Pcrit1 <-get.pcrit(data = fishMR, DO = "DO.mgL",
 ## Change time interval ##
 Pcrit2 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     Pcrit.below = 2,
+                    time.var = "std.time",
                     time.interval = 60,
                     start.time = "2015-07-03 06:15:00",
                     stop.time = "2015-07-03 08:05:00",
@@ -92,6 +94,7 @@ Pcrit2 <-get.pcrit(data = fishMR, DO = "DO.mgL",
 
 Pcrit3 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     Pcrit.below = 2,
+                    time.var = "std.time",
                     time.interval = 60,
                     start.time = "2015-07-03 06:15:00",
                     stop.time = "2015-07-03 08:05:00",
@@ -102,6 +105,7 @@ Pcrit3 <-get.pcrit(data = fishMR, DO = "DO.mgL",
 
 Pcrit4 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     Pcrit.below = 2,
+                    time.var = "std.time",
                     time.interval = 60,
                     start.time = "2015-07-03 06:15:00",
                     stop.time = "2015-07-03 08:05:00",
