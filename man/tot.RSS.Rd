@@ -8,7 +8,7 @@ Total residual sum of squares for broken stick model
 Calculates the total residual sum of squares for broken stick model (2 part)
 }
 \usage{
-tot.rss(data, break.pt, xvar, yvar)
+tot.RSS(data, break.pt, xvar, yvar)
 }
 
 \arguments{

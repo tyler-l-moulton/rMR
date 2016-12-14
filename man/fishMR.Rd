@@ -7,7 +7,7 @@ Gnathonemus respirometry trial data
 \description{
 This is a dataset acquired duirng a respirometry trial on a mormyrid of the species Gnathonemus victoriae. It went great. There are several "loops" (open/close the respirometer) to establish routine metabolic rate, as well as an extended 'close' period to capture the 'P.crit', the point at which the linear relationship between metabolic rate and ambient dissolved oxygen changed.
 }
-\usage{data("fishMR")}
+\usage{data(fishMR)}
 \format{
   A data frame with 64239 observations on the following 7 variables.
   \describe{
