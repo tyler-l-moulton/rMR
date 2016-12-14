@@ -236,59 +236,62 @@ Eq.Ox.conc <-
 #'
 
 get.pcrit <-
-    function(data, DO = NULL, MR = NULL, Pcrit.below,
-             idx.interval = NULL, index.var = "std.time",
-             start.idx = NULL, stop.idx = NULL,
-             time.units = "sec", Pcrit.type = "both",...){
+    function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
+             time.interval, time.var = NULL,
+             start.time, stop.time, time.units = "sec",
+             Pcrit.type = "both",...){
         
-        
-        data$DO <- eval(parse(text = paste("data$", DO, sep = "")))
-        
+        data$DO<- eval(parse(text = paste("data$", DO.var.name,
+                                              sep = "")))
+            
         
         ## set time denominator based on specified time.units ##
-        if(time.units == "sec"){
-            t.denom <- 1
-        }else if(time.units == "min"){
-            t.denom <- 60
-        }else if(time.units == "hr"){
-            t.denom <- 3600
+        
+        if(is.null(time.var)==FALSE){
+            if(time.units == "sec"){
+                t.denom <- 1
+            }else if(time.units == "min"){
+                t.denom <- 60
+            }else if(time.units == "hr"){
+                t.denom <- 3600
+            }
+            data$time <- eval(parse(text =
+                                   paste("data$", time.var, sep = "")))
+            
+            data <- data[data$time >= start.time
+                         & data$time <= stop.time,]
+            
+            data$time <- as.numeric(data$time) - min(as.numeric(data$time)) 
         }
+
+        
         
         if(any(is.na(data$DO)==T)){
             warning("DO variable contains missing values")
-        } 
+        }
+         
         
-        if(is.null(MR) == TRUE){
+        if(is.null(MR.var.name) == TRUE){
             
-            if(is.null(idx.interval)){
-                stop("if 'MR' = NULL, 'interval' must be specified")
+            if(is.null(time.interval)){
+                stop("if using DO to calculate rates & Pcrit,
+                     'interval' must be specified")
             }
-            
-            
-            data$idx <- eval(parse(text =
-                                       paste("data$", index.var, sep = "")))
-            
-            
-            data <- data[data$idx >= start.idx
-                         & data$idx <= stop.idx,]
-            
-            
-            data$idx <- as.numeric(data$idx) - min(as.numeric(data$idx))
             
             calc.MRs <- data.frame()
             
             i<-0
             
-            while(i + idx.interval < length(data$idx)){
-                the.interval <- data[data$idx >= i &
-                                         data$idx < i + idx.interval,]
-                m <- lm(DO ~ idx, data = the.interval)
+            while(i + time.interval < length(data$time)){
+                the.interval <- data[data$time >= i &
+                                         data$time < i + time.interval,]
+                m <- lm(DO ~ time, data = the.interval)
                 MR <- m$coefficients[2]*(-1)
                 DO <- mean(the.interval$DO, na.rm = TRUE)
-                time <- round(the.interval$idx[1])
+                time <- round(the.interval$time[1])
                 df.row <- t(c(DO, MR))
                 calc.MRs <- rbind(calc.MRs, df.row)
-                i <- i + idx.interval
+                i <- i + time.interval
                 
             }
             
@@ -297,7 +300,7 @@ get.pcrit <-
             names(data) <- c("DO", "MR")
             data$MR <- data$MR * t.denom
             
-        }else if(is.null(MR) == FALSE){
+        }else if(is.null(MR.var.name) == FALSE){
             data$MR <- eval(parse(text = paste("data$", MR, sep = "")))
         }
         
