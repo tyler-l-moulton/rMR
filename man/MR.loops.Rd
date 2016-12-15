@@ -36,7 +36,7 @@ Units of DO measurement entered in the DO variable column: must be one of "mg/L"
 Units of DO measurement returned for metabolic rate: must be one of "mg/L" for miligrams/liter, "PP" for partial pressure (units determined by bar.units), "pct" for saturation percent.
 }
   \item{start.idx}{
-Character class value or vector matching {POSIXct} object coding for date time. Each element of the vector represents the start time of a new 'loop' for calculation of metabolic rates.
+Character class value or vector matching "POSIXct" object coding for date time. Each element of the vector represents the start time of a new 'loop' for calculation of metabolic rates.
 }
   \item{stop.idx}{
 Character class value or vector matching "POSIXct" object coding for date time. Each element of the vector represents the stop time of a new loop for calculation of metabolic rates.
