@@ -1,5 +1,6 @@
 
 #'@import graphics
+#'@export
 plotRaw <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
@@ -434,8 +435,6 @@ get.pcrit <-
         
     }
 #'@export get.pcrit
-#'@import utils
-#'
 
 #'@import biglm
 #'@import stats
@@ -627,7 +626,8 @@ MR.loops <-
         }
 #'@export MR.loops
 #'
-
+#'@import utils
+#'@export
 get.witrox.data <-
     function(data.name, lines.skip, delimit="tab", choose.names = F,
              chosen.names = NULL,
@@ -672,6 +672,6 @@ get.witrox.data <-
         
     }
 #'@export get.witrox.data
-
+#'
 
 
