@@ -12,8 +12,8 @@ This package is written to accompany Loligo Systems respirometry equipment. The 
 \tabular{ll}{
 Package: \tab rMR\cr
 Type: \tab Package\cr
-Version: \tab 1.0.1\cr
-Date: \tab 2016-09-07\cr
+Version: \tab 1.0.2\cr
+Date: \tab 2016-12-14\cr
 License: \tab 3\cr
 }
 }
