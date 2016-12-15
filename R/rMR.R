@@ -345,7 +345,7 @@ get.pcrit <-
             data$MR <- data$MR * t.denom
             
         }else if(is.null(MR.var.name) == FALSE){
-            data$MR <- eval(parse(text = paste("data$", MR, sep = "")))
+            data$MR <- eval(parse(text = paste("data$", MR.var.name, sep = "")))
         }
         
         
