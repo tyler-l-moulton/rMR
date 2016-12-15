@@ -2,7 +2,7 @@
 \alias{MR.loops}
 
 \title{
-Calculate metabolic rates from multiple closed respirometry loops
+Calculate Metabolic Rates from Multiple Closed Respirometry Loops
 }
 \description{
 This function calculates the metabolic rates from multiple closed respirometry loops simultaneously. Requires lots of user input, but is easy to manipulate. Returns list of metabolic rates, as well as the average metabolic rate and the standard deviation of the sample of metabolic rates, as well as biglm objects for each section of data used to calculate MRs.
@@ -20,14 +20,14 @@ MR.loops(data, DO.var.name, time.var.name = "std.time",
 
 \arguments{
   \item{data}{
-'data' must include a time variable in standard as.POSIXct format. eg 
+Must include a time variable in standard POSIXct format. eg 
 "2016-09-25 15:30:00 EST".
 }
   \item{DO.var.name}{
 Column name of DO variable, must be entered as character string.
 }
   \item{time.var.name}{
-Column name of time variable (which is in as.POSIXct format) as character. defaults to "std.time" as generated from 'get.witrox.data'.
+Column name of time variable (which is in POSIXct format) as character. defaults to "std.time" as generated from get.witrox.data().
  }
   \item{in.DO.meas}{
 Units of DO measurement entered in the DO variable column: must be one of "mg/L" for miligrams/liter, "PP" for partial pressure, "pct" for saturation percent.
@@ -36,28 +36,28 @@ Units of DO measurement entered in the DO variable column: must be one of "mg/L"
 Units of DO measurement returned for metabolic rate: must be one of "mg/L" for miligrams/liter, "PP" for partial pressure (units determined by bar.units), "pct" for saturation percent.
 }
   \item{start.idx}{
-Character class value or vector matching as.POSIXct object coding for date time. Each element of the vector represents the start time of a new 'loop' for calculation of metabolic rates.
+Character class value or vector matching "POSIXct" object coding for date time. Each element of the vector represents the start time of a new 'loop' for calculation of metabolic rates.
 }
   \item{stop.idx}{
-Character class value or vector matching as.POSIXct object coding for date time. Each element of the vector represents the stop time of a new 'loop' for calculation of metabolic rates.
+Character class value or vector matching "POSIXct" object coding for date time. Each element of the vector represents the stop time of a new loop for calculation of metabolic rates.
 }
   \item{system.vol}{
 System volume in Liters (defaults to 1 L).
 }
   \item{background.consumption}{
-Default is 0. If using a one point calibration for background, simply set background.consumption equal to the value of the calculated respiration rate. If using a multi-point calibration, enter a vector of background respiration rates, and enter a corresponding vector for 'background.indices'. CAUTION: The slope must be entered in raw units  (i.e. those specified in the input data.frame in the 'data' argument). For example, if the 'DO.var.name' column is recorded in mg/L, and the as.POSIXct format goes to the resolution of seconds, background consumption units would need to be entered in mgO2 / sec. 
+Default = 0. If using a one point calibration for background, simply set "background.consumption" equal to the value of the calculated respiration rate. If using a multi-point calibration, enter a vector of background respiration rates, and enter a corresponding vector for "background.indices". CAUTION: The slope must be entered in raw units  (i.e. those specified in the input data.frame in the "data" argument). For example, if the "DO.var.name" column is recorded in mg/L, and the as.POSIXct format goes to the resolution of seconds, background consumption units would need to be entered in mgO2 / sec. 
 }
   \item{background.indices}{
-If using a multi-point calibration to set the background respiration rate, enter a vector of times for when the respiration rates were calculated. There should be one time point per corresponding value in 'background' consumption. The background respiration rate is continually factored into all calculations of metabolic rate. The elements of the vector must entered as character strings conforming to the as.POSIXct format specified in the 'time.var.name' column.
+If using a multi-point calibration to set the background respiration rate, enter a vector of times for when the respiration rates were calculated. There should be one time point per corresponding value in "background.consumption". The background respiration rate is continually factored into all calculations of metabolic rate. The elements of the vector must entered as character strings conforming to the POSIXct format specified in the "time.var.name" column.
 }
   \item{temp.C}{
 Water temperature in degrees C.
 }
   \item{elevation.m}{
-Elevation in m. Only required if bar.press = NULL.
+Elevation in m. Only required if "bar.press" = NULL.
 }
   \item{bar.press}{
-barometric pressure in units defined by bar.units argument. Only required if elevation.m = NULL.
+barometric pressure in units defined by bar.units argument. Only required if "elevation.m" = NULL.
 }
   \item{bar.units}{
 Units of barometric pressure used as input and in output if DO.meas.out = "PP". Acceptable arguments: "mmHg", "atm", "kpa".
@@ -69,11 +69,11 @@ Units of barometric pressure used for "PP".
 Denominator for metabolic rate, also displayed as units on X-axis. Acceptable arguments: "hr", "min", "sec".
 }
   \item{\dots}{
-arguments passed on to internal functions
+Arguments passed on to internal functions
 }
 }
 \value{
-Returns a list of 2. $MR.summary is a 'data.frame' with 3 columns: $MR (metabolic rate in user specified units, this is the same as the slope in each linear model), $sd.slope (standard deviation of slopes calculation), $r.square (adjusted r square value from each model). This second object is a list of 'biglm' objects, each one representing a metabolic "loop" (see McDonnell and Chapman 2016). 
+Returns a list of 2. $MR.summary is of class = data.frame with 3 columns: $MR (metabolic rate in user specified units, this is the same as the slope in each linear model), $sd.slope (standard deviation of slopes calculation), $r.square (adjusted r square value from each model). This second object is a list of "biglm" objects, each one representing a metabolic loop (see McDonnell and Chapman 2016). 
 }
 \references{
 McDonnell, Laura H., and Lauren J. Chapman. "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199 (2016): 62-70.
