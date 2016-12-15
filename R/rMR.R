@@ -352,7 +352,7 @@ get.pcrit <-
         
         
         minimum.DO <- 
-            as.numeric(min(data[data$DO <= Pcrit.below, "DO"], na.rm=TRUE))
+            as.numeric(min(data$DO <= Pcrit.below, na.rm=TRUE))
         
         zone.of.interest <- data[data$DO <= Pcrit.below,]
         zone.of.interest <- zone.of.interest[order(zone.of.interest$DO, 
