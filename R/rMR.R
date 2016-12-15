@@ -1,25 +1,20 @@
 
-#'@import tools
-paths <- sort(Sys.glob(c("data/fishMR.rda", "data/*.RData")))
-tools::checkRdaFiles(paths)
-
 #'@import graphics
-plot.raw <-
+plotRaw <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
              end.time = data$x[length(data$x)], ...){
+        
         orig = "1970-01-01 00:00:00 UTC"
         
         data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
         data <- data[data$x >= start.time & data$x <= end.time,]
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
-        
-        x<-data$x
-        y<-data$y
-        plot(x, y, ...)
+
+        plot(x=data$x, y=data$y, ...)
     }
 
-#'@export plot.raw
+#'@export plotRaw
 #'@import stats
 
 sumsq <-
@@ -441,51 +436,7 @@ get.pcrit <-
 #'@export get.pcrit
 #'@import utils
 #'
-#'
-get.witrox.data <-
-    function(data.name, lines.skip, delimit="tab", choose.names = F,
-             chosen.names = NULL,
-             format){
-        if(delimit == "tab"){
-            separate = "\t"
-        }else if(delimit == "space"){
-            separate = ""
-        }else if(delimit == "comma"){
-            separate = ","
-        }
-        
-        if(choose.names==F){
-            d<-read.table(data.name, sep=separate, skip=lines.skip,
-                          header =T,check.names=F)
-            invalid.names<-colnames(d)
-            valid.names<-make.names(colnames(d))
-            var.names<-NULL
-            for(i in 1:length(invalid.names)){
-                if(invalid.names[i] == valid.names[i]){
-                    var.names[i] <- valid.names[i]
-                }else{
-                    split.name.period <- as.vector(
-                        strsplit(valid.names[i], fixed = T,
-                                 split = ".")[[1]])
-                    split.name.period <- paste(split.name.period, sep="",
-                                               collapse="")
 
-                }
-            }
-        }else if(choose.names==T){
-            d<-read.table(data.name, sep = separate, skip = lines.skip,
-                          header = F)
-            var.names<-chosen.names
-        }
-        
-        colnames(d) <- var.names
-        d[,1]<-as.character(d[,1]) 
-        d$std.time <- as.POSIXct(strptime(d[,1], format = format),
-                                 origin = "1970-01-01 00:00:00 UTC")
-        return(d)
-        
-    }
-#'@export get.witrox.data
 #'@import biglm
 #'@import stats
 #'@import graphics
@@ -520,7 +471,7 @@ MR.loops <-
             t.denom <- 3600
         }
         
-
+        
         ## set response variable ##
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
         ## set time variable ##
@@ -530,7 +481,7 @@ MR.loops <-
         if(is.null(background.indices) == TRUE){
             bgd.slope.int <- background.consumption
             bgd.slope.slope <- 0
-                
+            
         }else if(is.null(background.indices) == FALSE) {
             if(length(background.indices) < 2){
                 stop("background.indices must be NULL or have a length >= 2")
@@ -554,12 +505,12 @@ MR.loops <-
             if(is.character(bar.press) == TRUE){
                 bar.press <- eval(parse(
                     text = paste("data$",
-                           bar.press, sep = "")))
+                                 bar.press, sep = "")))
             }else if(is.numeric(bar.press) == TRUE){
                 bar.press <- bar.press
             }else{
-               stop("'bar.press' must be 'NULL', numeric, or
-                      the col.name for barometric pressure")
+                stop("'bar.press' must be 'NULL', numeric, or
+                     the col.name for barometric pressure")
             }
             }
         
@@ -629,15 +580,15 @@ MR.loops <-
             dsn <- data[data$x >= as.POSIXct(start.idx[i]) &
                             data$x <= as.POSIXct(stop.idx[i]), ]
             dsn$adj.y <- dsn$y- ((as.numeric(dsn$x) -
-                          as.numeric(start.idx[i]))*
-                          ((as.numeric(dsn$x) * bgd.slope.slope) +
-                          bgd.slope.int))
+                                      as.numeric(start.idx[i]))*
+                                     ((as.numeric(dsn$x) * bgd.slope.slope) +
+                                          bgd.slope.int))
             
             data.new <- rbind(data.new, dsn)
         }
-
+        
         data <- data.new[(data.new$x >= start.idx[1] - 600) &
-                            data.new$x <= (tail(stop.idx,1) + 600),]
+                             data.new$x <= (tail(stop.idx,1) + 600),]
         x<-data$x
         y<-data$y
         type="n"
@@ -648,8 +599,8 @@ MR.loops <-
         MR.summary<-data.frame()
         for(i in 1:length(start.idx)){
             dat <- data.new[data.new$x >= start.idx[i]
-                        & data.new$x <= stop.idx[i],]
-
+                            & data.new$x <= stop.idx[i],]
+            
             
             mk <- biglm(adj.y ~ x, data=dat)
             ms[[i]] <- mk
@@ -665,7 +616,7 @@ MR.loops <-
             mrrow <- t(c(MR, sds, rsquare))
             MR.summary <- rbind(MR.summary,mrrow)
         }
-    
+        
         names(MR.summary) <- c("MR", "sd.slope", "r.square")
         MR.summary[,c(1,2)] <- MR.summary[,c(1,2)] * t.denom
         
@@ -674,25 +625,53 @@ MR.loops <-
         names(ofthejedi) <- c("MR.summary", "lm.details")
         return(ofthejedi)
         }
-
 #'@export MR.loops
-#'@import graphics
+#'
 
-plot.raw <-
-    function(data, DO.var.name, time.var.name = "std.time",
-             start.time = data$x[1],
-             end.time = data$x[length(data$x)], ...){
-        orig = "1970-01-01 00:00:00 UTC"
+get.witrox.data <-
+    function(data.name, lines.skip, delimit="tab", choose.names = F,
+             chosen.names = NULL,
+             format){
+        if(delimit == "tab"){
+            separate = "\t"
+        }else if(delimit == "space"){
+            separate = ""
+        }else if(delimit == "comma"){
+            separate = ","
+        }
         
-        data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
-        data <- data[data$x >= start.time & data$x <= end.time,]
-        data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
+        if(choose.names==F){
+            d<-read.table(data.name, sep=separate, skip=lines.skip,
+                          header =T,check.names=F)
+            invalid.names<-colnames(d)
+            valid.names<-make.names(colnames(d))
+            var.names<-NULL
+            for(i in 1:length(invalid.names)){
+                if(invalid.names[i] == valid.names[i]){
+                    var.names[i] <- valid.names[i]
+                }else{
+                    split.name.period <- as.vector(
+                        strsplit(valid.names[i], fixed = T,
+                                 split = ".")[[1]])
+                    split.name.period <- paste(split.name.period, sep="",
+                                               collapse="")
+
+                }
+            }
+        }else if(choose.names==T){
+            d<-read.table(data.name, sep = separate, skip = lines.skip,
+                          header = F)
+            var.names<-chosen.names
+        }
         
-        x<-data$x
-        y<-data$y
-        plot(x, y, ...)
+        colnames(d) <- var.names
+        d[,1]<-as.character(d[,1]) 
+        d$std.time <- as.POSIXct(strptime(d[,1], format = format),
+                                 origin = "1970-01-01 00:00:00 UTC")
+        return(d)
+        
     }
+#'@export get.witrox.data
 
-#'@export plot.raw
 
 

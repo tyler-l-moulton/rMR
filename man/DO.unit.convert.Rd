@@ -62,7 +62,7 @@ Use this function on entire data columns to convert them to desired units before
 
 \seealso{
 \code{\link{plot}}, 
-\code{\link{plot.raw}}, 
+\code{\link{plotRaw}}, 
 \code{\link{cbind}}, 
 \code{\link{Eq.Ox.conc}}, 
 \code{\link{DO.saturation}}, 
@@ -98,10 +98,10 @@ head(DO.pct.col.b)
 
 # Now with df #
 
-fishMR2 <- cbind(fishMR, DO.pct.col.a)
+fishMR2 <- as.data.frame(cbind(fishMR, DO.pct.col.a))
 
 par(mfrow = c(1,2))
-plot.raw(data = fishMR, DO.var.name = "DO.mgL",
+plotRaw(data = fishMR, DO.var.name = "DO.mgL",
           start.time = "2015-07-03 06:15:00",
           end.time = "2015-07-03 08:05:00",
           main = "DO (mg/L) vs time",
@@ -109,7 +109,7 @@ plot.raw(data = fishMR, DO.var.name = "DO.mgL",
           ylab = "DO (mg/L)")
           
 
-plot.raw(data = fishMR2, DO.var.name = "DO.pct.col.a",
+plotRaw(data = fishMR2, DO.var.name = "DO.pct.col.a",
           start.time = "2015-07-03 06:15:00",
           end.time = "2015-07-03 08:05:00",
           main = "DO (percent saturation) vs time",

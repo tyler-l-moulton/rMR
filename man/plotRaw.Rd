@@ -1,5 +1,5 @@
-\name{plot.raw}
-\alias{plot.raw}
+\name{plotRaw}
+\alias{plotRaw}
 
 \title{
 Plotting data from witrox
@@ -8,7 +8,7 @@ Plotting data from witrox
 A good way to visualize your respiro data to get an idea of where to set up the time intervals in functions like 'MR.loops' or 'get.pcrit'.
 }
 \usage{
-plot.raw(data, DO.var.name, time.var.name = "std.time",
+plotRaw(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
              end.time = data$x[length(data$x)],...)
 }
@@ -55,11 +55,11 @@ code{\link{MR.loops}},
 
 data(fishMR)
 
-plot.raw(data = fishMR, DO.var.name = "DO.mgL",
+plotRaw(data = fishMR, DO.var.name = "DO.mgL",
          start.time = "2015-07-03 06:15:00",
          end.time = "2015-07-03 08:05:00")
          
-plot.raw(fishMR, DO.var.name = "DO.mgL",
+plotRaw(fishMR, DO.var.name = "DO.mgL",
          start.time = "2015-07-03 01:00:00",
          end.time = "2015-07-03 05:12:00")
 

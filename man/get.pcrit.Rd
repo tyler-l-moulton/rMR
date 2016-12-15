@@ -5,7 +5,9 @@
 Calculate critical tension for rate processes
 }
 \description{
-Determines the critical point of a rate process based on the broken stick model featured in Yeager and Ultsch (1989). The two regressions are selected based on the break point which minimizes the total residual sum of squares.
+Determines the critical point of a rate process based on the broken stick model featured in Yeager and Ultsch (1989). The two regressions are selected based on the break point which minimizes the total residual sum of squares. The rate process that this package is designed for is metabolic rate ('MR.var.name'), and it is regressed on ambient dissolved oxygen concentration ('DO.var.name'). However, the same function can be used for other processes. 
+
+If metabolic rate has not already been calculated and the user wishes to calculate metabolic rates directly from oxygen concentration measurements, let 'MR.var.name'=NULL. Then indicate the name of the time variable AND the time interval (i.e. the width of the time window over which you will estimate instantaneous metaboic rates).
 }
 \usage{
 get.pcrit(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
@@ -33,10 +35,10 @@ Metabolic rate variable name, formatted as character. Default = 'NULL'. Cannot h
     Column name for indexing(time) variable used to calculate instantaneous Metabolic Rate (MR) from oxygen concentration data (specified by DO.var.name). Must be a character string.
 }
   \item{start.time}{
-    Beginning of time interval over which to evaluate data for Pcrit. Required if MR.var.name = NULL.
+    Beginning of time interval over which to evaluate data for Pcrit. Required if MR.var.name = NULL. Must be character string in the default POSIXct format (matches format of 'time.var').
 }
   \item{stop.time}{
-    End of time interval over which to evaluate data for Pcrit. Required if MR.var.name = NULL.
+    End of time interval over which to evaluate data for Pcrit. Required if MR.var.name = NULL. Must be character string in the default POSIXct format (matches format of 'time.var').
 }
   \item{time.units}{
 Units of time in MR calculation. Defaults to "sec", must be "sec", "min", or "hr". Required if MR.var.name = NULL.
@@ -49,10 +51,10 @@ Arguments passed on to internal functions.
 }
 }
 \details{
-This calculates the critical oxygen tension for a change in metabolic rate. It is a simple broken stick model which evaluates the data at dissolved oxygen values < 'Pcrit.below'. The data of MR and DO are ordered by decreasing DO value. Then, the function iteratively calculates the total residual sum of squares (using tot.RSS) of two linear models, one spanning from 'Pcrit.below' to 'Pcrit.below' - i, the other with a range from the minimum DO value to 'Pcrit.below' - (i + 1). The broken stick model resulting in the lowest total residual sum of squares is selected. The Pcrit is the DO value at the intersection point of the broken stick model. This is indicated by a blue circle on the plot.
+This calculates the critical oxygen tension for a change in metabolic rate. It is a simple broken stick model which evaluates the data at dissolved oxygen values < 'Pcrit.below'. The data of MR and DO are ordered by decreasing DO value. Then, the function iteratively calculates the total residual sum of squares (using 'tot.rss') of two linear models, one spanning from 'Pcrit.below' to 'Pcrit.below' - i, the other with a range from the minimum DO value to 'Pcrit.below' - (i + 1). The broken stick model resulting in the lowest total residual sum of squares is selected. The Pcrit is the DO value at the intersection point of the broken stick model. This is indicated by a blue circle on the plot.
 }
 \value{
-Returns a list of 6. $Pcrit.lm is the Pcrit given by the intersection of the two best fit lines. $P$Adj.r2.above gives the adjusted R2 value of the relationship between MR~DO above the critical point, and likewise, $Adj.r2.below gives the R2 below the critical point. The other 24 list elements are from the two linear models (denoted as above and below the pcrit) in the broken stick model.
+A scatterplot of MR ~ DO is generated with the two regression lines. The function returns a list of 6. $Pcrit.lm is the Pcrit given by the intersection of the two best fit lines (dark blue vertical line). $Pcrit.mp is the Pcrit using the midpoint method (light blue vertical line). $P$Adj.r2.above gives the adjusted R2 value of the relationship between MR~DO above the critical point, and likewise, $Adj.r2.below gives the R2 below the critical point. The other two elements are 'lm'class objects calculated from the regression slopes above and below the break point in the broken stick model (which is not necessarily the same point as where the regression lines intersect!).
 }
 \references{
 Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-9

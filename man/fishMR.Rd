@@ -12,7 +12,7 @@ This is a dataset acquired duirng a respirometry trial on a mormyrid of the spec
   A data frame with 64239 observations on the following 7 variables.
   \describe{
     \item{\code{Date.time}}{a character vector}
-    \item{\code{timestamp}}{a numeric vector}
+    \item{\code{times}}{a numeric vector}
     \item{\code{Bar.Pressure.hpa}}{a numeric vector}
     \item{\code{Phase}}{a numeric vector}
     \item{\code{temp.C}}{a numeric vector}
