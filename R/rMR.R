@@ -18,6 +18,7 @@ plotRaw <-
 #'@export plotRaw
 #'@import stats
 
+#'@export
 sumsq <-
     function(x){
         mx<-mean(x)
@@ -28,7 +29,7 @@ sumsq <-
 #'@export sumsq
 #'@import stats
 #'
-
+#'@export
 tot.rss <-
     function(data, break.pt, xvar, yvar){
         data$x <- eval(parse(text = paste("data$", xvar, sep="")))
@@ -45,7 +46,7 @@ tot.rss <-
 #'@export tot.rss
 #'@import biglm
 #'@import stats
-
+#'@export
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
@@ -83,7 +84,7 @@ background.resp <-
 
 #'@export background.resp
 #'
-
+#'@export
 Barom.Press <-
     function(elevation.m, units = "atm"){
         if(units == "atm") {fact <-1}
@@ -101,6 +102,7 @@ Barom.Press <-
     }
 
 #'@export Barom.Press
+#'@export
 #'
 DO.saturation <-
     function(DO.mgl, temp.C, elevation.m = NULL,
@@ -123,7 +125,7 @@ DO.saturation <-
 #'@export DO.saturation
 #'
 
-
+#'@export
 DO.unit.convert <-
     function(x, DO.units.in, DO.units.out, 
              bar.units.in, bar.press, temp.C,
@@ -181,6 +183,7 @@ DO.unit.convert <-
         
         return(DO.conc)
     }
+#'@export DO.unit.convert
 #'@export
 #'
 
@@ -278,7 +281,7 @@ Eq.Ox.conc <-
 #'@import biglm
 #'@import stats
 #'@import graphics
-
+#'@export
 get.pcrit <-
     function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
              time.interval, time.var = NULL,
@@ -439,7 +442,7 @@ get.pcrit <-
 #'@import biglm
 #'@import stats
 #'@import graphics
-
+#'@export
 MR.loops <-
     function(data, DO.var.name, time.var.name = "std.time",
              in.DO.meas = "mg/L", out.DO.meas = "mg/L",
