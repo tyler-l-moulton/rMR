@@ -20,7 +20,7 @@ MR.loops(data, DO.var.name, time.var.name = "std.time",
 
 \arguments{
   \item{data}{
-Must include a time variable in standard \code{POSIXct} format. eg 
+Must include a time variable in standard \code{POSIXct} poop format. eg 
 "2016-09-25 15:30:00 EST".
 }
   \item{DO.var.name}{
