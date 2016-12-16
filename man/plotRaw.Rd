@@ -2,10 +2,10 @@
 \alias{plotRaw}
 
 \title{
-Plotting data from witrox
+Plotting Data from Witrox
 }
 \description{
-A good way to visualize your respiro data to get an idea of where to set up the time intervals in functions like 'MR.loops' or 'get.pcrit'.
+A good way to visualize your respiro data to get an idea of where to set up the time intervals in functions like \code{MR.loops()} or \code{get.pcrit()}.
 }
 \usage{
 plotRaw(data, DO.var.name, time.var.name = "std.time",
@@ -18,23 +18,23 @@ plotRaw(data, DO.var.name, time.var.name = "std.time",
 data object for plotting
 }
  \item{DO.var.name}{
-A character string matching the column header for the DO variable column
+A character string matching the column header for the DO variable column.
 }
   \item{time.var.name}{
 Column name of time (or x) axis in character class. 
 }
   \item{start.time}{
-Character string specifying left bound x limit in 'strptime' compatable format
+Character string specifying left bound x limit in \code{strptime} compatable format.
 }
   \item{end.time}{
-Character string specifying right bound x limit in 'strptime' compatable format
+Character string specifying right bound x limit in \code{strptime} compatable format.
 }
   \item{\dots}{
-Arguments passed on to internal functions
+Arguments passed on to internal functions.
 }
 }
 \details{
-start.time and end.time arguments must match the time.var.name column's format for date time.
+\code{start.time} and \code{end.time} arguments must match the \code{time.var.name} column's format for date time.
 }
 \value{
 Plot showing the overall metabolic data

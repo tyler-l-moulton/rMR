@@ -30,10 +30,10 @@ Column name of DO variable, must be entered as character string.
 Column name of time variable (which is in \code{POSIXct} format) as character. defaults to "std.time" as generated from \code{get.witrox.data()}.
  }
   \item{in.DO.meas}{
-Units of DO measurement entered in the DO variable column: must be one of "mg/L" for miligrams/liter, "PP" for partial pressure, "pct" for saturation percent.
+Units of DO measurement entered in the DO variable column: must be one of \code{"mg/L"} for miligrams/liter, \code{"PP"} for partial pressure, \code{"pct"} for saturation percent.
 }
   \item{out.DO.meas}{
-Units of DO measurement returned for metabolic rate: must be one of "mg/L" for miligrams/liter, "PP" for partial pressure (units determined by \code{bar.units}, "pct" for saturation percent.
+Units of DO measurement returned for metabolic rate: must be one of \code{"mg/L"} for miligrams/liter, \code{"PP"} for partial pressure (units determined by \code{bar.units}), \code{"pct"} for saturation percent.
 }
   \item{start.idx}{
 Character class value or vector matching \code{POSIXct} object coding for date time. Each element of the vector represents the start time of a new loop for calculation of metabolic rates.

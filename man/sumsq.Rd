@@ -5,7 +5,7 @@
 Sum of squares
 }
 \description{
-Internal function for use in package for calculating sum of squares of a vector.
+Internal Function for Use in Package for Calculating Sum of Squares of a Vector
 }
 \usage{
 sumsq(x)

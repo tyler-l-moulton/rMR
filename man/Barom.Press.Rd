@@ -2,7 +2,7 @@
 \alias{Barom.Press}
 
 \title{
-Estimate barometric pressure
+Estimate Barometric Pressure
 }
 \description{
  Function to estimate barometric pressure based on altitude.
@@ -16,7 +16,7 @@ Barom.Press(elevation.m, units = "atm")
 Elevation in meters above sea level.
 }
   \item{units}{
-Output units for barometric pressure must be one of: "atm", "kpa", or "mmHg".
+Output units for barometric pressure must be one of: \code{"atm"}, \code{"kpa"}, or \code{"mmHg"}.
 }
 }
 \details{

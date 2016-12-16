@@ -2,10 +2,10 @@
 \alias{fishMR}
 \docType{data}
 \title{
-Gnathonemus respirometry trial data
+Gnathonemus Respirometry Trial Data
 }
 \description{
-This is a dataset acquired duirng a respirometry trial on a mormyrid of the species Gnathonemus victoriae. It went great. There are several "loops" (open/close the respirometer) to establish routine metabolic rate, as well as an extended 'close' period to capture the 'P.crit', the point at which the linear relationship between metabolic rate and ambient dissolved oxygen changed.
+This is a dataset acquired duirng a respirometry trial on a mormyrid of the species Gnathonemus victoriae. It went great. There are several "loops" (open/close the respirometer) to establish routine metabolic rate, as well as an extended "closed" period to capture the "P.crit", the point at which the linear relationship between metabolic rate and ambient dissolved oxygen changed.
 }
 \usage{data(fishMR)}
 \format{

@@ -1,11 +1,11 @@
 \name{background.resp}
 \alias{background.resp}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-A function for determining the background respiration in a respirometer
+Determine the Background Respiration in a Respirometer
 }
 \description{
-background.resp takes user-defined start and end times to calculate the backround respiration rate in a respirometer. 
+Takes user-defined start and end times to calculate the backround respiration rate in a respirometer. 
 }
 \usage{
 background.resp(data, DO.var.name,
@@ -14,26 +14,26 @@ start.time, end.time, ...)
 }
 \arguments{
   \item{data}{
-Dataframe to be used, best if formatted by "get.witrox.data" 
+\code{data.frame} object to be used, best if formatted by \code{get.witrox.data}. 
 }
   \item{DO.var.name}{
 Column name of DO variable, formatted as a character string.
 }
   \item{time.var.name}{
-Column name of time variable as character string. Time column must be formatted as default class for datetime: class = "POSIXct" "POSIXt", strptime format = "\%Y-\%m-\%d \%H:\%M:\%S".
+Column name of time variable as character string. Time column must be formatted as default class for datetime: \code{class = "POSIXct" "POSIXt"}, \code{strptime} format = \code{"\%Y-\%m-\%d \%H:\%M:\%S"}.
 }
   \item{start.time}{
-Input start time as character string of strptime format = "\%Y-\%m-\%d \%H:\%M:\%S".
+Input start time as character string of \code{strptime} format = \code{"\%Y-\%m-\%d \%H:\%M:\%S"}.
 }
   \item{end.time}{
-Input endtime as character string of strptime format = "\%Y-\%m-\%d \%H:\%M:\%S".
+Input endtime as character string of \code{strptime} format = \code{"\%Y-\%m-\%d \%H:\%M:\%S"}.
 }
   \item{\dots}{
-Passes on arguments to internal functions
+Passes on arguments to internal functions.
 }
 }
 \value{
-Returns an object of method 'biglm'. The slope of this funtion is the metabolic rate in input units/(default time).
+Returns an object of method \code{biglm}. The slope of this funtion is the metabolic rate in input units/(default time).
 }
 \references{
 Thomas Lumley (2013). biglm: bounded memory linear and generalized linear models. R package version 0.9-1. http://CRAN.R-project.org/package=biglm

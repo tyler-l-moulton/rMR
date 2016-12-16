@@ -2,7 +2,7 @@
 \alias{DO.saturation}
 
 \title{
-  Calculate oxygen saturation of water
+  Calculate Oxygen Saturation of Water
 }
 \description{
 Calculate the percent saturation of oxygen in water given external temperature, barometric pressure, and recorded DO concentration in mg/L.
@@ -21,19 +21,19 @@ Recorded DO concentration in mg/L.
 Temperature in degrees C.
 }
   \item{elevation.m}{
-Elevation in meters above sea level. EITHER 'elevation.m' or 'bar.press' must be specified.
+Elevation in meters above sea level. EITHER \code{elevation.m} or \code{bar.press} must be specified.
 }
   \item{bar.press}{
-Barometric pressure in user defined units (bar.units)--defaults to 'NULL'. EITHER 'elevation.m' or 'bar.press' must be specified.
+Barometric pressure in user defined units (bar.units)--defaults to \code{NULL}. EITHER \code{elevation.m} or \code{bar.press} must be specified.
 }
   \item{bar.units}{
-Units of barometric pressure, defaults to 'NULL'. must be 'atm', 'kpa' or "mmHg"
+Units of barometric pressure, defaults to \code{NULL}. must be \code{"atm"}, \code{"kpa"} or \code{"mmHg"}
 }
   \item{salinity}{
-    Salinity, either reported in parts per thousand (pp.thou) or microsiemens/cm (us) 
+    Salinity, either reported in parts per thousand (\code{"pp.thou"}) or microsiemens/cm (\code{"us"}). 
 }
   \item{salinity.units}{
-    Salinity units, must be "pp.thou" or "us" 
+    Salinity units, must be \code{"pp.thou"} or \code{"us"} 
 }
 }
 

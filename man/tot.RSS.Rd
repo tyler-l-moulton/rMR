@@ -2,7 +2,7 @@
 \alias{tot.rss}
 
 \title{
-Total residual sum of squares for broken stick model
+Total Residual Sum of Squares for Broken Stick Model
 }
 \description{
 Calculates the total residual sum of squares for broken stick model (2 part)
