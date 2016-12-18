@@ -44,9 +44,10 @@ tot.rss <-
         return(trss)
     }
 #'@export tot.rss
+
+#'@export
 #'@import biglm
 #'@import stats
-#'@export
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
