@@ -46,7 +46,7 @@ tot.rss <-
 #'@export tot.rss
 
 #'@export
-
+#'@import biglm
 #'@import stats
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
@@ -279,7 +279,7 @@ Eq.Ox.conc <-
         return(Cp)
             }
 #'@export DO.unit.convert
-
+#'@import biglm
 #'@import stats
 #'@import graphics
 #'@export
@@ -440,7 +440,7 @@ get.pcrit <-
     }
 #'@export get.pcrit
 
-
+#'@import biglm
 #'@import stats
 #'@import graphics
 #'@export
