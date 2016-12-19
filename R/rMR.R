@@ -1,6 +1,7 @@
 
-#'@import graphics
+
 #'@export
+#'@import graphics
 plotRaw <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
@@ -15,10 +16,10 @@ plotRaw <-
         plot(x=data$x, y=data$y, ...)
     }
 
-#'@export plotRaw
-#'@import stats
+
 
 #'@export
+#'@import stats
 sumsq <-
     function(x){
         mx<-mean(x)
@@ -26,10 +27,10 @@ sumsq <-
         sumsquares<-sum(sq.dev)
         return(sumsquares)
     }
-#'@export sumsq
-#'@import stats
-#'
+
+
 #'@export
+#'@import stats
 tot.rss <-
     function(data, break.pt, xvar, yvar){
         data$x <- eval(parse(text = paste("data$", xvar, sep="")))
@@ -43,10 +44,9 @@ tot.rss <-
         trss <- (sumsq(m1$residuals)+sumsq(m2$residuals))
         return(trss)
     }
-#'@export tot.rss
 
 #'@export
-#'@import biglm
+
 #'@import stats
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
@@ -83,8 +83,6 @@ background.resp <-
         return(summary(m1))
     }
 
-#'@export background.resp
-#'
 #'@export
 Barom.Press <-
     function(elevation.m, units = "atm"){
@@ -102,7 +100,7 @@ Barom.Press <-
         return(P)
     }
 
-#'@export Barom.Press
+
 #'@export
 #'
 DO.saturation <-
@@ -123,8 +121,6 @@ DO.saturation <-
         
         return(DO.sat)
     }
-#'@export DO.saturation
-#'
 
 #'@export
 DO.unit.convert <-
@@ -184,10 +180,8 @@ DO.unit.convert <-
         
         return(DO.conc)
     }
-#'@export DO.unit.convert
-#'@export
-#'
 
+#'@export
 Eq.Ox.conc <-
     function(temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = NULL,
@@ -278,11 +272,11 @@ Eq.Ox.conc <-
 
         return(Cp)
             }
-#'@export DO.unit.convert
-#'@import biglm
+
+#'@export
+
 #'@import stats
 #'@import graphics
-#'@export
 get.pcrit <-
     function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
              time.interval, time.var = NULL,
@@ -438,12 +432,11 @@ get.pcrit <-
         return(Pc)
         
     }
-#'@export get.pcrit
 
-#'@import biglm
+#'@export
+
 #'@import stats
 #'@import graphics
-#'@export
 MR.loops <-
     function(data, DO.var.name, time.var.name = "std.time",
              in.DO.meas = "mg/L", out.DO.meas = "mg/L",
@@ -628,10 +621,9 @@ MR.loops <-
         names(ofthejedi) <- c("MR.summary", "lm.details")
         return(ofthejedi)
         }
-#'@export MR.loops
-#'
-#'@import utils
+
 #'@export
+#'@import utils
 get.witrox.data <-
     function(data.name, lines.skip, delimit="tab", choose.names = F,
              chosen.names = NULL,
@@ -675,7 +667,5 @@ get.witrox.data <-
         return(d)
         
     }
-#'@export get.witrox.data
-#'
 
 
