@@ -48,6 +48,7 @@ tot.rss <-
 #'@export
 
 #'@import stats
+#'@import biglm
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
@@ -277,6 +278,7 @@ Eq.Ox.conc <-
 
 #'@import stats
 #'@import graphics
+#'@import biglm
 get.pcrit <-
     function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
              time.interval, time.var = NULL,
@@ -437,6 +439,7 @@ get.pcrit <-
 
 #'@import stats
 #'@import graphics
+#'@import biglm
 MR.loops <-
     function(data, DO.var.name, time.var.name = "std.time",
              in.DO.meas = "mg/L", out.DO.meas = "mg/L",
@@ -575,7 +578,7 @@ MR.loops <-
             
             dsn <- data[data$x >= as.POSIXct(start.idx[i]) &
                             data$x <= as.POSIXct(stop.idx[i]), ]
-            dsn$adj.y <- dsn$y- ((as.numeric(dsn$x) -
+            dsn$adj.y <- (dsn$y- (as.numeric(dsn$x) -
                                       as.numeric(start.idx[i]))*
                                      ((as.numeric(dsn$x) * bgd.slope.slope) +
                                           bgd.slope.int))
@@ -587,8 +590,8 @@ MR.loops <-
                              data.new$x <= (tail(stop.idx,1) + 600),]
         x<-data$x
         y<-data$y
-        type="n"
-        plot(x, y, ...)
+        
+        plot(x, y, type="n",...)
         
         name.num<-as.character(c(1:length(start.idx)))
         ms<-list()
