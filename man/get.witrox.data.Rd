@@ -5,7 +5,7 @@
 Load Data from AutoResp Software Generated Txt Files
 }
 \description{
-Allows user to import data from loligo autoresp software text files into a R data.frame (class data.frame)
+Allows user to import data from Loligo Systems 'Autoresp' software text files into a R data.frame (class \code{data.frame})
 }
 \usage{
 get.witrox.data(data.name, lines.skip, delimit = "tab", 
@@ -45,7 +45,7 @@ Tyler L. Moulton
 }
 \examples{
 # Requires a text file. Download fish_MR.txt from github repository and
-# accompanying readme file at:s
+# accompanying readme file at:
 # https://github.com/tyler-l-moulton/rMR
 
 }

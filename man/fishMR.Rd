@@ -17,7 +17,7 @@ This is a dataset acquired duirng a respirometry trial on a mormyrid of the spec
     \item{\code{Phase}}{a numeric vector}
     \item{\code{temp.C}}{a numeric vector}
     \item{\code{DO.mgL}}{a numeric vector}
-    \item{\code{std.time}}{a POSIXct}
+    \item{\code{std.time}}{a \code{POSIXct} vector of time values} 
   }
   }
 \references{

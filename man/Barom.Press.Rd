@@ -28,9 +28,7 @@ Returns numeric object of barometric pressure in specified units.
 \references{
 Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
 
-https://en.wikipedia.org/wiki/Barometric_formula
-
-http://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
+U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
 }
 \author{
 Tyler L. Moulton

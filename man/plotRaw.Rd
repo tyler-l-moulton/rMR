@@ -44,10 +44,10 @@ Tyler L. Moulton
 }
 
 \seealso{
-code{\link{plot}},
-code{\link{strptime}},
-code{\link{get.pcrit}},
-code{\link{MR.loops}},
+\code{\link{plot}},
+\code{\link{strptime}},
+\code{\link{get.pcrit}},
+\code{\link{MR.loops}},
 
 }
 \examples{

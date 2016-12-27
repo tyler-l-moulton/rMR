@@ -14,7 +14,7 @@ start.time, end.time, ...)
 }
 \arguments{
   \item{data}{
-\code{data.frame} object to be used, best if formatted by \code{get.witrox.data}. 
+\code{data.frame} object to be used, best if formatted by \code{get.witrox.data()}. 
 }
   \item{DO.var.name}{
 Column name of DO variable, formatted as a character string.

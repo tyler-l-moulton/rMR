@@ -5,7 +5,7 @@
 Convert Between Different Common Units of DO Concentration
 }
 \description{
-This function converts between different different units of DO concentration. Takes into account ambient temperature and pressure.
+Converts between different different units of DO concentration. Takes into account ambient temperature, pressure and salinity.
 }
 \usage{
 DO.unit.convert(x, DO.units.in, DO.units.out, bar.units.in,
