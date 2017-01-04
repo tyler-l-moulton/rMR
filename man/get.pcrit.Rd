@@ -69,9 +69,12 @@ Tyler L. Moulton
 }
 \examples{
 ## set data ##
-
 data(fishMR)
 
+## create time variable in POSIXct format ##
+fishMR$std.time <- as.POSIXct(fishMR$Date.time,
+                    format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
+                    
 Pcrit1 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     Pcrit.below = 2,
                     time.var = "std.time",

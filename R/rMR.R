@@ -6,9 +6,7 @@ plotRaw <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time = data$x[1],
              end.time = data$x[length(data$x)], ...){
-        
-        orig = "1970-01-01 00:00:00 UTC"
-        
+
         data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
         data <- data[data$x >= start.time & data$x <= end.time,]
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
@@ -52,20 +50,23 @@ tot.rss <-
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
+       
+        origin.t <- "1970-01-01 00:00:00 UTC"
         
-        orig = "1970-01-01 00:00:00 UTC"
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
         data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
+
         if(class(start.time) != class(end.time)) {
             stop ("start time and end time must be of same atomic class")
         }
         if(is.character(start.time)==T){
             data <- data[data$x >= as.POSIXct(start.time,
-                                              origin = orig) &
+                                              origin=orig) &
                              data$x<= as.POSIXct(end.time,
-                                                 origin = orig),]  
+                                                 origin=orig),]  
         }else if (class(start.time)[1]==("POSIXct") &
                       class(start.time)[2]==("POSIXt")){
+        
             data <- data[data$x >= start.time &
                              data$x <= end.time] 
         }

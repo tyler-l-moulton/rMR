@@ -54,6 +54,9 @@ Tyler L. Moulton
 ## load data ##
 
 data(fishMR)
+## create time variable in POSIXct format ##
+fishMR$std.time <- as.POSIXct(fishMR$Date.time,
+                    format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
 
 plotRaw(data = fishMR, DO.var.name = "DO.mgL",
          start.time = "2015-07-03 06:15:00",

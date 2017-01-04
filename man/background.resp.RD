@@ -49,7 +49,12 @@ Tyler L. Moulton
  \code{\link{biglm}}
 }
 \examples{
+##load data##
 data(fishMR)
+
+## create time variable in POSIXct format ##
+fishMR$std.time <- as.POSIXct(fishMR$Date.time,
+                    format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
 
 bgd.resp <- 
 background.resp(fishMR, "DO.mgL", 

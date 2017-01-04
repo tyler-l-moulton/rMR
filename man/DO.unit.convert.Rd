@@ -79,7 +79,12 @@ DO.pct<- DO.unit.convert(x= 125.6863, DO.units.in = "PP",
 ## load data ##
 data(fishMR)
 
+## create time variable in POSIXct format ##
+fishMR$std.time <- as.POSIXct(fishMR$Date.time,
+                    format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
+
 head(fishMR)
+
 #note that DO data are in mg/L (DO.mgL) and
 #that there is an instantaneous temperature column
 #(temp.C) and a pressure column (Bar.Pressure.hpa)
