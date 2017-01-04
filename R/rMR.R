@@ -51,7 +51,7 @@ background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
              start.time, end.time, ...){
        
-        origin.t <- "1970-01-01 00:00:00 UTC"
+        orig <- "1970-01-01 00:00:00 UTC"
         
         data$y <- eval(parse(text = paste("data$", DO.var.name, sep = "")))
         data$x <- eval(parse(text = paste("data$", time.var.name, sep = "")))
