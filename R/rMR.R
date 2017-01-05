@@ -318,9 +318,9 @@ get.pcrit <-
         
         if(is.null(MR.var.name) == TRUE){
             
-            if(is.null(time.interval)){
+            if(is.null(time.interval) == TRUE){
                 stop("if using DO to calculate rates & Pcrit,
-                     'interval' must be specified")
+                     'time.interval' must be specified")
             }
             
             calc.MRs <- data.frame()

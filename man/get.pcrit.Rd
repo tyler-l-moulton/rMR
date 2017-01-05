@@ -20,10 +20,10 @@ get.pcrit(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
 Data to be used.
 }
   \item{DO.var.name}{
-Variable name of oxygen concentration variable, formatted as character string. To be used for determination of critical point. Requires \code{time.interval} to be specified.
+Variable name of oxygen concentration variable, formatted as character string. To be used for determination of critical point. If using pre-calculated instantaneous metabolic rates (MR) to conduct Pcrit, this should be specified by \code{MR.var.name}. If using raw oxygen values with time stamps to compute instantaneous MR within the function, \code{get.pcrit} requires \code{time.interval} to be specified.
 }
   \item{MR.var.name}{
-Metabolic rate variable name, formatted as character. Default = \code{NULL}. Cannot have value unless \code{DO.var.name = NULL}.
+Metabolic rate variable name, formatted as character. Default = \code{NULL}. If this argument takes a value, Pcrit will be calculated by regressing \code{MR.var.name} on \code{DO.var.name}. \code{time.var} and {time.interval} should, in this case, take no value. If \code{MR.var.name} is left as\code{NULL}, then instantaneous metabolic rates (MR) at specified time intervals (see \code{time.interval}) from \code{DO.var.name} and \code{time.var}.
 }
   \item{Pcrit.below}{
     DO concentration below which you are confident that Pcrit occurs. Accelerates process by reducing the number of iterations required to find Pcrit. Data points featuring DO conc > \code{Pcrit.below} are still used to calculate regressions for model.
