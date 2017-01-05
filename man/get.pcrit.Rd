@@ -57,7 +57,7 @@ This calculates the critical oxygen tension for a change in metabolic rate. It i
 A scatterplot of MR ~ DO is generated with the two regression lines. Also returns a list of 6. \code{$Pcrit.lm} is the Pcrit given by the intersection of the two best fit lines (dark blue vertical line). \code{$Pcrit.mp} is the Pcrit using the midpoint method (light blue vertical line). \code{$P$Adj.r2.above} gives the adjusted R2 value of the relationship between MR~DO above the critical point, and likewise, \code{$Adj.r2.below} gives the R2 below the critical point. The other two elements are \code{lm} class objects calculated from the regression slopes above and below the break point in the broken stick model (which is not necessarily the same point as where the regression lines intersect!).
 }
 \references{
-Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-9
+Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907. \doi{10.1086/physzool.62.4.30157935}.
 }
 \author{
 Tyler L. Moulton

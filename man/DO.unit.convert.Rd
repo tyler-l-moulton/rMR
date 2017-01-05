@@ -47,9 +47,9 @@ Units of dissolved oxygen concentration measured, i.e. to be converted from. Mus
 Numeric object representing dissolved oxygen concentration in the units specified by \code{DO.units.out}. 
 }
 \references{
-Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
+Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C. \url{https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19730018242.pdf}.
 
-U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
+U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at \url{http://water.usgs.gov/admin/memo/QW/qw11.03.pdf}.
 }
 \author{
 Tyler L. Moulton

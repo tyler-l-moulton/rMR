@@ -76,9 +76,9 @@ Arguments passed on to internal functions
 Returns a list of 2. \code{$MR.summary} is of class {data.frame} with 3 columns: \code{$MR} (metabolic rate in user specified units, this is the same as the slope in each linear model), \code{$sd.slope} (standard deviation of slopes calculation), \code{$r.square} (adjusted r square value from each model). This second object is a list of \code{biglm} objects, each one representing a metabolic loop (see McDonnell and Chapman 2016). 
 }
 \references{
-McDonnell, Laura H., and Lauren J. Chapman. "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199 (2016): 62-70.
+McDonnell, Laura H., and Lauren J. Chapman (2016). "Effects of thermal increase on aerobic capacity and swim performance in a tropical inland fish." Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 199: 62-70. \doi{10.1016/j.cbpa.2016.05.018}.
 
-Roche, Dominique G., et al. "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11 (2013): 2103-2110.
+Roche, Dominique G., et al. (2013). "Finding the best estimates of metabolic rates in a coral reef fish." Journal of Experimental Biology 216.11: 2103-2110. \doi{10.1242/jeb.082925}.
 
 }
 \author{

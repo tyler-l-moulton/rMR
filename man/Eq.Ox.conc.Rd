@@ -41,13 +41,14 @@ salinity = 0, salinity.units = "pp.thou")
 Returns object of class numberic of full equilibrium dissolved oxygen concentration.
 }
 \references{
-Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media, 2012.
+Benson, B.B., and Daniel Krause, Jr (1980). The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671. \doi{10.4319/lo.1980.25.4.0662}.
 
-Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C.
+Gnaiger, Erich, and Hellmuth Forstner, eds. Polarographic oxygen sensors: Aquatic and physiological applications. Springer Science & Business Media, 2012. \doi{10.1007/978-3-642-81863-9}.
 
-U.S. Geological Survey, 2011, Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at http://water.usgs.gov/admin/memo/QW/qw11.03.pdf
+Mechtly, E. A., 1973: The International System of Units, Physical Constants and Conversion Factors. NASA SP-7012, Second Revision, National Aeronautics and Space Administration, Washington, D.C. \url{https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19730018242.pdf}.
 
-Benson, B.B., and Daniel Krause, Jr, 1980, The concentration and isotopic fractionation of gases dissolved in freshwater in equilibrium with the atmosphere. 1. Oxygen: Limnology and Oceanography, vol. 25, no. 4, p. 662-671
+U.S. Geological Survey (2011). Change to solubility equations for oxygen in water: Office of Water Quality Technical Memorandum 2011.03, accessed July 15, 2011, at \url{http://water.usgs.gov/admin/memo/QW/qw11.03.pdf}.
+
 }
 \author{
 Tyler L. Moulton

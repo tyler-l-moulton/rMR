@@ -36,7 +36,7 @@ Passes on arguments to internal functions.
 Returns an object of method \code{biglm}. The slope of this funtion is the metabolic rate in input units/(default time).
 }
 \references{
-Thomas Lumley (2013). biglm: bounded memory linear and generalized linear models. R package version 0.9-1. http://CRAN.R-project.org/package=biglm
+Thomas Lumley (2013). biglm: bounded memory linear and generalized linear models. R package version 0.9-1. \url{https://CRAN.R-project.org/package=biglm}.
 
 }
 \author{

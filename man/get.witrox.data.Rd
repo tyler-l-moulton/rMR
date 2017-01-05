@@ -2,10 +2,10 @@
 \alias{get.witrox.data}
 
 \title{
-Load Data from AutoResp Software Generated Txt Files
+Load Data from 'AutoResp' Software Generated .txt Files
 }
 \description{
-Allows user to import data from Loligo Systems 'Autoresp' software text files into a R data.frame (class \code{data.frame})
+Allows user to import data from Loligo (R) Systems' 'Autoresp' software-generated text files into a R data.frame (class \code{data.frame})
 }
 \usage{
 get.witrox.data(data.name, lines.skip, delimit = "tab", 
