@@ -402,18 +402,16 @@ get.pcrit <-
         names(intersect)<-NULL
         if(is.na(mod.2$coefficients[2])==T){
             abline(mod.1$coefficients[1], 0)
-        }else{abline(coef = mod.1$coefficients, col="red", lwd = 1.5, ...)}
-        abline(coef = mod.2$coefficients, col = "red", lwd = 1.5, ...)
-        
-        points(x = intersect, y = mod.1$coefficients[1] +
-                   mod.1$coefficients[2]*intersect, pch=21,
-               col = "blue", cex=1.5)
+        }else{abline(coef = mod.1$coefficients, col="gray40", lwd = 2, ...)}
+        abline(coef = mod.2$coefficients, col = "gray40", lwd = 2, ...)
+
         
         if (Pcrit.type == "lm" | Pcrit.type == "both"){
-            abline(v = intersect, col = "blue", lwd = 1.5,...)            
+            abline(v = intersect, lwd = 2, lty=2,...)            
         }
         if (Pcrit.type == "midpoint" | Pcrit.type == "both"){
-            abline(v = midpoint.approx, col = "lightblue", lwd = 1.5,...)            
+            abline(v = midpoint.approx, col = "gray60",
+                   lwd = 2, lty=3, ...)            
         }
         
 
