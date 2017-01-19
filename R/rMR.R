@@ -80,7 +80,7 @@ background.resp <-
         x<-data$x
         y<-data$y
         plot(x, y, col=col.vec[1], ...)
-        abline(coefficients(m1), col = col.vec[2], lwd=2.5)
+        abline(coefficients(m1), col = col.vec[2],...)
         
         return(summary(m1))
     }
@@ -404,19 +404,15 @@ get.pcrit <-
         names(intersect)<-NULL
         if(is.na(mod.2$coefficients[2])==T){
             abline(mod.1$coefficients[1], 0)
-        }else{abline(coef = mod.1$coefficients, col = col.vec[2],
-                     lwd = 2, ...)}
-        abline(coef = mod.2$coefficients, col = col.vec[2],
-               lwd = 2, ...)
+        }else{abline(coef = mod.1$coefficients, col = col.vec[2], ...)}
+        abline(coef = mod.2$coefficients, col = col.vec[2], ...)
 
         
         if (Pcrit.type == "lm" | Pcrit.type == "both"){
-            abline(v = intersect, col = col.vec[3],
-                   lwd = 2, lty=2,...)            
+            abline(v = intersect, col = col.vec[3], lty=2, ...)            
         }
         if (Pcrit.type == "midpoint" | Pcrit.type == "both"){
-            abline(v = midpoint.approx, col = col.vec[4],
-                   lwd = 2, lty=3, ...)            
+            abline(v = midpoint.approx, col = col.vec[4], lty=3, ...)            
         }
         
 
@@ -612,7 +608,7 @@ MR.loops <-
             points(dat$x, dat$adj.y, col = col.vec[1])
             names(ms[[i]])<-paste(names(ms[[i]]), name.num[i], sep=".")
             abline(coef(ms[[i]]),
-                   col = col.vec[2],  lwd = 2)
+                   col = col.vec[2], ...)
             
             MR <- coef(mk)[2]*-1
             sds <- summary(mk)$mat[2,4]*sqrt(length(dat[,1]))
