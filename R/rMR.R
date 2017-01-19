@@ -49,7 +49,7 @@ tot.rss <-
 #'@import biglm
 background.resp <-
     function(data, DO.var.name, time.var.name = "std.time",
-             start.time, end.time, ...){
+             start.time, end.time, col.vec = c("black","red"), ...){
        
         orig <- "1970-01-01 00:00:00 UTC"
         
@@ -79,8 +79,8 @@ background.resp <-
         if (MR1>=0){warning("slope control 1 negative")}
         x<-data$x
         y<-data$y
-        plot(x, y, ...)
-        abline(coefficients(m1), col="red", lwd=2.5)
+        plot(x, y, col=col.vec[1], ...)
+        abline(coefficients(m1), col = col.vec[2], lwd=2.5)
         
         return(summary(m1))
     }
@@ -284,7 +284,8 @@ get.pcrit <-
     function(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
              time.interval, time.var = NULL,
              start.time, stop.time, time.units = "sec",
-             Pcrit.type = "both",...){
+             Pcrit.type = "both",
+             col.vec = c("black", "gray60", "red", "blue"),...){
         
         data$DO<- eval(parse(text = paste("data$", DO.var.name,
                                               sep = "")))
@@ -346,7 +347,8 @@ get.pcrit <-
             data$MR <- data$MR * t.denom
             
         }else if(is.null(MR.var.name) == FALSE){
-            data$MR <- eval(parse(text = paste("data$", MR.var.name, sep = "")))
+            data$MR <- eval(parse(text = paste("data$", MR.var.name,
+                                               sep = "")))
         }
         
         
@@ -396,21 +398,24 @@ get.pcrit <-
         
         plot(MR~DO, data, type= "n", ...)
         points(x = c(dat1$DO, dat2$DO), y = c(dat1$MR, dat2$MR), 
-               cex = .7, ...)
+               cex = .7, col = col.vec[1], ...)
         intersect<-(mod.2$coefficients[1] - mod.1$coefficients[1]) /
             (mod.1$coefficients[2] - mod.2$coefficients[2])
         names(intersect)<-NULL
         if(is.na(mod.2$coefficients[2])==T){
             abline(mod.1$coefficients[1], 0)
-        }else{abline(coef = mod.1$coefficients, col="gray40", lwd = 2, ...)}
-        abline(coef = mod.2$coefficients, col = "gray40", lwd = 2, ...)
+        }else{abline(coef = mod.1$coefficients, col = col.vec[2],
+                     lwd = 2, ...)}
+        abline(coef = mod.2$coefficients, col = col.vec[2],
+               lwd = 2, ...)
 
         
         if (Pcrit.type == "lm" | Pcrit.type == "both"){
-            abline(v = intersect, lwd = 2, lty=2,...)            
+            abline(v = intersect, col = col.vec[3],
+                   lwd = 2, lty=2,...)            
         }
         if (Pcrit.type == "midpoint" | Pcrit.type == "both"){
-            abline(v = midpoint.approx, col = "gray60",
+            abline(v = midpoint.approx, col = col.vec[4],
                    lwd = 2, lty=3, ...)            
         }
         
@@ -447,7 +452,8 @@ MR.loops <-
              background.indices = NULL,
              temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = "atm",
-             PP.units, time.units = "sec",...){
+             PP.units, time.units = "sec",
+             col.vec = c("black", "red"),...){
         ## format the time vectors into POSIX ##
         orig = "1970-01-01 00:00:00 UTC"
         start.idx <- as.POSIXct((start.idx), origin = orig)
@@ -603,10 +609,10 @@ MR.loops <-
             mk <- biglm(adj.y ~ x, data=dat)
             ms[[i]] <- mk
             
-            points(dat$x, dat$adj.y)
+            points(dat$x, dat$adj.y, col = col.vec[1])
             names(ms[[i]])<-paste(names(ms[[i]]), name.num[i], sep=".")
             abline(coef(ms[[i]]),
-                   col="red",  lwd = 2)
+                   col = col.vec[2],  lwd = 2)
             
             MR <- coef(mk)[2]*-1
             sds <- summary(mk)$mat[2,4]*sqrt(length(dat[,1]))

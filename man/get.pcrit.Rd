@@ -13,7 +13,8 @@ If metabolic rate has not already been calculated and the user wishes to calcula
 get.pcrit(data, DO.var.name, MR.var.name = NULL, Pcrit.below,
              time.interval, time.var = NULL,
              start.time, stop.time, time.units = "sec",
-             Pcrit.type = "both",...)
+             Pcrit.type = "both",
+             col.vec = c("black", "gray60", "red", "blue"),...)
 }
 \arguments{
   \item{data}{
@@ -49,12 +50,15 @@ Either \code{"lm"} to draw a vertical line at the Pcrit as determined by the int
   \item{\dots}{
 Arguments passed on to internal functions.
 }
+  \item{col.vec}{
+Specifies colors on plot in the following order: 1) scatterplot points representing instantaneous MR, 2) regression lines color, 3) vertical line representing Pcrit using the intersect method (\code{Pcrit.type = "lm"}), 4)vertical line representing Pcrit using the midpoint method (\code{Pcrit.type = "midpoint"}).
+}
 }
 \details{
-This calculates the critical oxygen tension for a change in metabolic rate. It is a simple broken stick model which evaluates the data at dissolved oxygen values recorded within the specified time frame. The data of MR and DO are ordered by decreasing DO value. Then, the function iteratively calculates the total residual sum of squares (using \code{tot.rss}) of two linear models, one spanning from \code{Pcrit.below} to \code{Pcrit.below} - i, the other with a range from the minimum DO value to \code{Pcrit.below} - (i + 1). The broken stick model resulting in the lowest total residual sum of squares is selected. The Pcrit is the DO value at the intersection point of the broken stick model. This is indicated by a blue circle on the plot.
+This calculates the critical oxygen tension for a change in metabolic rate. It is a simple broken stick model which evaluates the data at dissolved oxygen values recorded within the specified time frame. The data of MR and DO are ordered by decreasing DO value. Then, the function iteratively calculates the total residual sum of squares (using \code{tot.rss}) of two linear models, one spanning from \code{Pcrit.below} to \code{Pcrit.below} - i, the other with a range from the minimum DO value to \code{Pcrit.below} - (i + 1). The broken stick model resulting in the lowest total residual sum of squares is selected. 
 }
 \value{
-A scatterplot of MR ~ DO is generated with the two regression lines. Also returns a list of 6. \code{$Pcrit.lm} is the Pcrit given by the intersection of the two best fit lines (dark blue vertical line). \code{$Pcrit.mp} is the Pcrit using the midpoint method (light blue vertical line). \code{$P$Adj.r2.above} gives the adjusted R2 value of the relationship between MR~DO above the critical point, and likewise, \code{$Adj.r2.below} gives the R2 below the critical point. The other two elements are \code{lm} class objects calculated from the regression slopes above and below the break point in the broken stick model (which is not necessarily the same point as where the regression lines intersect!).
+A scatterplot of MR ~ DO is generated with the two regression lines (in gray). Also returns a list of 6. \code{$Pcrit.lm} is the Pcrit given by the intersection of the two best fit lines (vertical red dashed line). \code{$Pcrit.mp} is the Pcrit using the midpoint method (vertical blue dotted vertical line). \code{$P$Adj.r2.above} gives the adjusted R2 value of the relationship between MR~DO above the critical point, and likewise, \code{$Adj.r2.below} gives the R2 below the critical point. The other two elements are \code{lm} class objects calculated from the regression slopes above and below the break point in the broken stick model (which is not necessarily the same point as where the regression lines intersect!).
 }
 \references{
 Yeager, D. P. and Ultsch, G. R. (1989). Physiological regulation and conformation: a BASIC program for the determination of critical points. Physiological Zoology, 888-907. \doi{10.1086/physzool.62.4.30157935}.

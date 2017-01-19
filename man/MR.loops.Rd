@@ -15,7 +15,8 @@ MR.loops(data, DO.var.name, time.var.name = "std.time",
              background.indices = NULL,
              temp.C, elevation.m = NULL,
              bar.press = NULL, bar.units = "atm",
-             PP.units, time.units = "sec", ...)
+             PP.units, time.units = "sec",
+             col.vec = c("black","red"),...)
 }
 
 \arguments{
@@ -67,6 +68,9 @@ Units of barometric pressure used for "PP".
 }
   \item{time.units}{
 Denominator for metabolic rate, also displayed as units on X-axis. Acceptable arguments: "hr", "min", "sec".
+}
+  \item{col.vec}{
+Specifies colors on plot in the following order: 1) scatterplot points, 2) regression lines color.
 }
   \item{\dots}{
 Arguments passed on to internal functions

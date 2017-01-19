@@ -10,7 +10,7 @@ Takes user-defined start and end times to calculate the backround respiration ra
 \usage{
 background.resp(data, DO.var.name,
 time.var.name = "std.time", 
-start.time, end.time, ...)
+start.time, end.time, col.vec = c("black","red"),...)
 }
 \arguments{
   \item{data}{
@@ -27,6 +27,9 @@ Input start time as character string of \code{strptime} format = \code{"\%Y-\%m-
 }
   \item{end.time}{
 Input endtime as character string of \code{strptime} format = \code{"\%Y-\%m-\%d \%H:\%M:\%S"}.
+}
+  \item{col.vec}{
+Specifies colors on plot in the following order: 1) scatterplot points, 2) regression color.
 }
   \item{\dots}{
 Passes on arguments to internal functions.
