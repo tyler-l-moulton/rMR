@@ -75,7 +75,7 @@ data(fishMR)
 fishMR$std.time <- as.POSIXct(fishMR$Date.time,
                     format = "\%d/\%m/\%Y \%I:\%M:\%S \%p")
                     
-Pcrit1 <-get.pcrit(data = fishMR, DO = "DO.mgL",
+Pcrit1 <-get.pcrit(data = fishMR, DO.var.name = "DO.mgL",
                     Pcrit.below = 2,
                     time.var = "std.time",
                     time.interval = 120,
@@ -84,7 +84,7 @@ Pcrit1 <-get.pcrit(data = fishMR, DO = "DO.mgL",
 ## MR units in mgO2 / sec
             
 ## Change time interval ##
-Pcrit2 <-get.pcrit(data = fishMR, DO = "DO.mgL",
+Pcrit2 <-get.pcrit(data = fishMR, DO.var.name = "DO.mgL",
                     Pcrit.below = 2,
                     time.var = "std.time",
                     time.interval = 60,
@@ -93,7 +93,7 @@ Pcrit2 <-get.pcrit(data = fishMR, DO = "DO.mgL",
                     time.units = "min")
 ## MR units in mgO2 / min
 
-Pcrit3 <-get.pcrit(data = fishMR, DO = "DO.mgL",
+Pcrit3 <-get.pcrit(data = fishMR, DO.var.name = "DO.mgL",
                     Pcrit.below = 2,
                     time.var = "std.time",
                     time.interval = 60,
@@ -104,7 +104,7 @@ Pcrit3 <-get.pcrit(data = fishMR, DO = "DO.mgL",
 
 ## No vertical lines on plot
 
-Pcrit4 <-get.pcrit(data = fishMR, DO = "DO.mgL",
+Pcrit4 <-get.pcrit(data = fishMR, DO.var.name = "DO.mgL",
                     Pcrit.below = 2,
                     time.var = "std.time",
                     time.interval = 60,
