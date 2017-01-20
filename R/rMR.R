@@ -79,7 +79,19 @@ background.resp <-
         if (MR1>=0){warning("slope control 1 negative")}
         x<-data$x
         y<-data$y
-        plot(x, y, col=col.vec[1], ...)
+        
+        # Too keep point edges from getting obscured and hazy
+        dots<-list(...)
+        if(exists("dots$cex")==TRUE){
+            cex.val<-0.7
+        }else{cex.val<-dots$cex}
+        
+        if(exists("dots$pch")==TRUE){
+            pch.val<-1
+        }else{pch.val<-dots$pch}
+        
+        plot(x, y, type="n", ...)
+        points(x=x, y=y, cex=cex.val, pch=pch.val, col=col.vec[1])
         abline(coefficients(m1), col = col.vec[2],...)
         
         return(summary(m1))
@@ -397,8 +409,7 @@ get.pcrit <-
         ## Plot: line intersect##
         
         plot(MR~DO, data, type= "n", ...)
-        points(x = c(dat1$DO, dat2$DO), y = c(dat1$MR, dat2$MR), 
-               cex = .7, col = col.vec[1], ...)
+      
         intersect<-(mod.2$coefficients[1] - mod.1$coefficients[1]) /
             (mod.1$coefficients[2] - mod.2$coefficients[2])
         names(intersect)<-NULL
@@ -414,9 +425,19 @@ get.pcrit <-
         if (Pcrit.type == "midpoint" | Pcrit.type == "both"){
             abline(v = midpoint.approx, col = col.vec[4], lty=3, ...)            
         }
+       # Too keep point edges from getting obscured and hazy
+        dots<-list(...)
+        if(exists("dots$cex")==TRUE){
+            cex.val<-0.7
+        }else{cex.val<-dots$cex}
         
+        if(exists("dots$pch")==TRUE){
+            pch.val<-1
+        }else{pch.val<-dots$pch}
+            
+        points(x = c(dat1$DO, dat2$DO), y = c(dat1$MR, dat2$MR), 
+                   cex = cex.val, pch = pch.val, col = col.vec[1])
 
-        
         
         dat.pre<-data[data$DO>=(2*intersect),]
         
@@ -597,6 +618,16 @@ MR.loops <-
         name.num<-as.character(c(1:length(start.idx)))
         ms<-list()
         MR.summary<-data.frame()
+        
+        dots<-list(...)
+        if(exists("dots$cex")==TRUE){
+            cex.val<-0.7
+        }else{cex.val<-dots$cex}
+        
+        if(exists("dots$pch")==TRUE){
+            pch.val<-1
+        }else{pch.val<-dots$pch}
+        
         for(i in 1:length(start.idx)){
             dat <- data.new[data.new$x >= start.idx[i]
                             & data.new$x <= stop.idx[i],]
@@ -605,7 +636,8 @@ MR.loops <-
             mk <- biglm(adj.y ~ x, data=dat)
             ms[[i]] <- mk
             
-            points(dat$x, dat$adj.y, col = col.vec[1])
+            points(dat$x, dat$adj.y, col = col.vec[1],
+                   pch = pch.val, cex = cex.val)
             names(ms[[i]])<-paste(names(ms[[i]]), name.num[i], sep=".")
             abline(coef(ms[[i]]),
                    col = col.vec[2], ...)
